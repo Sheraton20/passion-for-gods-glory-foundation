@@ -1,1 +1,1 @@
-{"name":"passion-for-gods-glory-foundation","version":"1.0.0","private":true,"scripts":{"start":"node server.js"}}
+{"name":"passion-for-gods-glory-foundation","version":"1.0.0","private":true,"scripts":{"start":"node server.js"},"dependencies":{"@supabase/supabase-js":"2.57.0"}}
