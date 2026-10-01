@@ -124,19 +124,19 @@ $("saveDesign").onclick=saveDesign;$("saveSettings").onclick=saveSettings;$("new
 async function loadSupabaseLibrary(){
  if(window.supabase)return true;
  setStatus("Loading secure login service…");
- const urls=["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0","https://unpkg.com/@supabase/supabase-js@2.57.0/dist/umd/supabase.js"];
- for(const url of urls){
-  try{
-   await new Promise((resolve,reject)=>{
-    const s=document.createElement("script");
-    s.src=url;s.async=true;s.onload=resolve;s.onerror=()=>reject(new Error("Library load failed"));
-    document.head.appendChild(s);
-    setTimeout(()=>reject(new Error("Library load timed out")),6000);
-   });
-   if(window.supabase)return true;
-  }catch(e){}
+ try{
+  await new Promise((resolve,reject)=>{
+   const s=document.createElement("script");
+   s.src="/node_modules/@supabase/supabase-js/dist/umd/supabase.js";
+   s.async=true;s.onload=resolve;s.onerror=()=>reject(new Error("Local Supabase client could not be loaded"));
+   document.head.appendChild(s);
+   setTimeout(()=>reject(new Error("Local Supabase client timed out")),8000);
+  });
+  return !!window.supabase;
+ }catch(e){
+  setStatus("The secure login service could not be loaded: "+e.message,"error");
+  return false;
  }
- return false;
 }
 async function boot(){
  setStatus("Loading secure Editing Studio…");
