@@ -13,3 +13,4 @@ http.createServer((req,res)=>{
   const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.json':'application/json'};
   res.writeHead(200,{'Content-Type':types[ext]||'application/octet-stream','Cache-Control':'no-cache'});fs.createReadStream(f).pipe(res);
 }).listen(port,'0.0.0.0',()=>console.log('Foundation website listening on '+port+'; index='+findIndex()));
+// Railway deployment trigger: serve the verified foundation homepage from the repository root.
