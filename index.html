@@ -130,153 +130,13 @@ img,svg{max-width:100%}
   .hero-photo{position:absolute!important;inset:0!important;width:100%;height:100%;min-height:100%}
   .hero-copy{min-height:92vh}
 }
-</style>\n<style id="hero-slideshow-polish">.hero-photo{overflow:hidden}.hero-slideshow{position:absolute;inset:0;z-index:0}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity 1.2s ease,transform 7s ease}.hero-slide.active{opacity:1;transform:scale(1)}.hero-photo-frame{z-index:1}.hero-badge,.photo-caption{z-index:3}.hero-dots{position:absolute;z-index:4;right:42px;bottom:38px;display:flex;gap:7px;padding:8px 10px;border-radius:999px;background:rgba(8,38,30,.45);backdrop-filter:blur(10px)}.hero-dot{width:7px;height:7px;padding:0;border:1px solid rgba(255,255,255,.75);border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.3)}@media(max-width:900px){.hero-dots{right:20px;bottom:20px}.hero-dot{width:6px;height:6px}.hero-photo{min-height:100%!important}}@media(max-width:520px){.hero-dots{right:18px;bottom:16px;padding:7px 9px;gap:6px}.hero-dot{width:6px;height:6px}}</style>\n<style id="responsive-device-layout">
-/* Professional responsive layouts: desktop, tablet and phone */
-.container,.section{width:100%}
-@media (min-width:1200px){
-  .nav{padding-left:6%;padding-right:6%}
-  .hero-copy{padding-left:9%;padding-right:6%}
-  .hero h1{font-size:clamp(64px,6vw,94px)}
-  .section{padding-left:6%;padding-right:6%;max-width:1440px}
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .story-grid{grid-template-columns:1.15fr .85fr 1fr}
-}
-@media (min-width:769px) and (max-width:1199px){
-  .nav{padding:12px 4%;gap:12px}
-  .links{gap:12px;font-size:12px}
-  .nav>.btn{padding:11px 16px}
-  .hero{min-height:760px}
-  .hero-copy{min-height:760px;padding:100px 6% 80px}
-  .hero h1{font-size:clamp(52px,6.5vw,76px);letter-spacing:-3px}
-  .hero p{font-size:17px;max-width:590px}
-  .hero-badge{right:26px;top:26px}
-  .photo-caption{left:58%;right:28px;bottom:34px}
-  .section{padding:78px 5%}
-  .story-lead{grid-template-columns:1fr 1fr;gap:30px}
-  .big-photo{min-height:420px}
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-  .story-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-  .story-grid .story:last-child{grid-column:1/-1;max-width:calc(50% - 9px)}
-  .impact-wrap{grid-template-columns:1fr 1.4fr;gap:30px}
-  .trip{padding:48px}
-  .footer{grid-template-columns:2fr 1fr 1fr;padding-left:5%;padding-right:5%}
-}
-@media (max-width:768px){
-  .nav{padding:10px 16px}
-  .links{display:none}
-  .hero{display:block;min-height:calc(100svh - 64px)}
-  .hero-photo{position:absolute!important;inset:0!important;height:100%!important;min-height:100%!important}
-  .hero-copy{min-height:calc(100svh - 64px)!important;padding:94px 20px 50px!important;justify-content:flex-end;background:linear-gradient(180deg,rgba(6,30,23,.55),rgba(6,30,23,.72) 45%,rgba(6,30,23,.94))}
-  .hero h1{font-size:clamp(43px,13vw,58px);letter-spacing:-2px}
-  .hero p{font-size:15px;line-height:1.55}
-  .hero-actions{display:grid;grid-template-columns:1fr}
-  .hero-actions .btn{width:100%}
-  .hero-badge{top:14px;right:14px}
-  .photo-caption{left:20px!important;right:20px!important;bottom:20px!important}
-  .hero-dots{right:18px;bottom:16px}
-  .section{padding:56px 17px!important}
-  .story-lead,.donate,.impact-wrap{grid-template-columns:1fr}
-  .grid,.story-grid{grid-template-columns:1fr!important}
-  .story-grid .story:last-child{max-width:none;grid-column:auto}
-  .big-photo{min-height:300px}
-  .impact{grid-template-columns:1fr 1fr!important}
-  .trip{padding:34px 20px!important}
-  .trip .grid{grid-template-columns:1fr!important}
-  .form-grid{grid-template-columns:1fr!important}
-  .footer{grid-template-columns:1fr!important}
-}
-</style><style id="desktop-layout-final">
-@media (min-width:901px){
-  .nav{padding:14px 4.5%;gap:28px}
-  .brand{flex:0 0 auto}
-  .links{gap:17px;flex:1;justify-content:center}
-  .nav>.btn{flex:0 0 auto}
-  .hero{min-height:760px;height:calc(100vh - 72px);max-height:900px}
-  .hero-copy{min-height:100%;padding:90px clamp(60px,7vw,120px);justify-content:center}
-  .hero h1{font-size:clamp(58px,5.8vw,88px);max-width:760px}
-  .hero p{max-width:610px;font-size:18px}
-  .hero-actions{margin-top:28px}
-  .hero-photo{min-height:100%!important}
-  .hero-slide{inset:0!important}
-  .photo-caption{left:auto;right:58px;bottom:48px;max-width:430px}
-  .hero-badge{right:38px;top:38px}
-  .hero-dots{right:38px!important;bottom:38px!important}
-  .section{max-width:1280px;padding:92px 6%}
-  .section.alt{max-width:none}
-  .section>.intro{max-width:820px}
-  .story-lead{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:64px}
-  .big-photo{min-height:560px}
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-  .program-card{min-width:0}
-  .card-image{height:220px}
-  .impact-wrap{max-width:1200px;grid-template-columns:minmax(300px,.9fr) minmax(0,1.6fr);gap:70px}
-  .trip{max-width:1200px;margin:auto;padding:72px}
-  .trip .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .story-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-  .story-media{height:300px}
-  .form{max-width:1050px}
-  .donate{grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:28px}
-  .footer{padding-left:7%;padding-right:7%;grid-template-columns:minmax(0,2fr) minmax(150px,1fr) minmax(150px,1fr);gap:60px}
-}
-@media (min-width:1200px){
-  .nav{padding-left:5%;padding-right:5%}
-  .links{gap:22px}
-  .hero-copy{padding-left:9%;padding-right:9%}
-  .section{padding-left:7%;padding-right:7%}
-  .hero h1{max-width:820px}
-}
-</style><style id="final-desktop-professional">
-@media (min-width:901px){
-  body{background:#fff}
-  .nav{height:76px;padding:10px clamp(28px,5vw,80px);gap:24px}
-  .brand-name{font-size:15px}.brand-sub{font-size:8px}
-  .links{gap:16px;font-size:12px;white-space:nowrap}
-  .nav>.btn{padding:12px 20px;white-space:nowrap}
-  .hero{height:760px;min-height:760px;max-height:none;display:grid;grid-template-columns:minmax(430px,.86fr) minmax(0,1.14fr);background:var(--deep)}
-  .hero-copy{min-height:760px;height:760px;padding:80px clamp(48px,6vw,96px);justify-content:center;background:linear-gradient(135deg,#061e17 0%,#0d3b2e 100%);overflow:visible}
-  .hero-copy:after{right:-110px;bottom:-150px;width:360px;height:360px}
-  .hero h1{font-size:clamp(54px,5.2vw,76px);max-width:650px;letter-spacing:-3px;margin:16px 0 22px}
-  .hero p{font-size:17px;max-width:570px}
-  .hero-actions{margin-top:27px}
-  .hero-note{margin-top:30px}
-  .hero-photo{position:relative!important;inset:auto!important;width:100%;height:760px;min-height:760px;overflow:hidden;background:none!important}
-  .hero-slide{position:absolute!important;inset:0!important;background-size:cover!important;background-position:center!important;opacity:0;transition:opacity 1s ease,transform 8s ease!important;transform:scale(1.03)}
-  .hero-slide.active{opacity:1;transform:scale(1)}
-  .hero-photo-frame{position:absolute!important;inset:0!important;background:linear-gradient(90deg,rgba(6,30,23,.28),transparent 32%),linear-gradient(180deg,rgba(5,27,21,.02),rgba(5,27,21,.48));z-index:1}
-  .hero-photo:before{inset:18px;border-radius:28px}
-  .hero-badge{top:30px;right:30px}
-  .photo-caption{left:38px;right:38px;bottom:34px}
-  .hero-dots{right:38px!important;bottom:34px!important;z-index:5}
-  .section{max-width:1240px;padding:92px 44px}
-  .section.alt{max-width:none;padding-left:max(44px,calc((100vw - 1240px)/2));padding-right:max(44px,calc((100vw - 1240px)/2))}
-  .intro{max-width:760px}
-  .intro h2{font-size:52px}
-  .story-lead{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
-  .big-photo{min-height:500px}
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-  .program-card{min-height:410px}
-  .card-image{height:205px}
-  .impact-band{padding:68px 44px}
-  .impact-wrap{max-width:1150px;grid-template-columns:.9fr 1.5fr;gap:70px}
-  .impact{grid-template-columns:repeat(4,1fr)}
-  .trip{max-width:1150px;padding:68px}
-  .story-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .story-media{height:285px}
-  .form{max-width:1000px}
-  .donate{grid-template-columns:1.2fr .8fr;max-width:1150px;margin:auto}
-  .footer{padding:60px max(44px,calc((100vw - 1240px)/2)) 28px}
-}
-@media (min-width:1200px){
-  .hero-copy{padding-left:clamp(60px,8vw,140px)}
-  .hero h1{font-size:78px}
-}
 </style></head>
 <body id="top">
 <nav class="nav"><a class="brand" href="#top" aria-label="Go to homepage"><span class="mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 47S13 36 13 23c0-6 4-10 10-10 4 0 7 2 9 6 2-4 5-6 9-6 6 0 10 4 10 10 0 13-19 24-19 24Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M32 19v20M24 29h16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span><span class="brand-copy"><span class="brand-name">A Passion For God's Glory</span><span class="brand-sub">Foundation • Hope in Action</span></span></a><div class="links"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div><a class="btn" href="#donate">Give</a><button class="nav-menu" aria-label="Open menu" aria-expanded="false">☰</button><div class="mobile-menu"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div></nav>
 
 <header class="hero">
 <div class="hero-copy"><div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div><div class="eyebrow">A Passion For God's Glory Foundation</div><div class="hero-kicker"><span></span> Serving people. Restoring hope. Building community.</div><h1>Hope begins when <span>we show up.</span></h1><p>We walk with children, mothers, young people and communities through practical care, encouragement and compassion — inspired by faith and welcoming every background.</p><div class="hero-actions"><a class="btn gold" href="#donate">Support the mission</a><a class="btn light" href="#about">Discover our story</a></div><div class="hero-note"><b>People first.</b><span>Service with dignity. Impact with honesty.</span></div><div class="hero-pills"><span>Faith-inspired</span><span>People-centred</span><span>Global mission</span></div></div>
-<div class="hero-photo"><div class="hero-slideshow" aria-label="Foundation community slideshow"><div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1728135020024-b617b9f96394?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1593113646773-028c64a8f1b8?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1524600458977-62f028117758?auto=format&fit=crop&w=2000&q=92')"></div><div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1740741704998-8074200ce5d6?auto=format&fit=crop&w=2000&q=92')"></div></div><div class="hero-photo-frame"></div><div class="photo-caption"><small>Africa • Global • Hope</small><strong>Beautiful people. Real communities. Meaningful service.</strong></div><div class="hero-badge"><span>✦</span><div><b>Hope in Action</b><small>Across borders & communities</small></div></div><div class="hero-dots" aria-label="Slideshow controls"><button class="hero-dot active" aria-label="Show slide 1"></button><button class="hero-dot" aria-label="Show slide 2"></button><button class="hero-dot" aria-label="Show slide 3"></button><button class="hero-dot" aria-label="Show slide 4"></button><button class="hero-dot" aria-label="Show slide 5"></button><button class="hero-dot" aria-label="Show slide 6"></button><button class="hero-dot" aria-label="Show slide 7"></button></div></div>
+<div class="hero-photo"><div class="hero-photo-frame"></div><div class="photo-caption"><small>Africa • Global • Hope</small><strong>Beautiful people. Real communities. Meaningful service.</strong></div><div class="hero-badge"><span>✦</span><div><b>Hope in Action</b><small>Across borders & communities</small></div></div></div>
 </header>
 
 <section id="about" class="section reveal"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:42px"><div class="card" style="background:var(--green);color:#fff"><div class="eyebrow">01</div><h3 style="color:#fff">See people</h3><p style="color:#dce9e3">We begin by listening, noticing needs and treating every person with dignity.</p></div><div class="card" style="background:var(--sand)"><div class="eyebrow">02</div><h3>Walk together</h3><p>We build relationships rather than treating communities as projects.</p></div><div class="card"><div class="eyebrow">03</div><h3>Serve with care</h3><p>We aim for practical action, responsible stewardship and honest reporting.</p></div></div><div class="story-lead"><div class="big-photo" aria-label="African mother and child in Kampala"></div><div><div class="kicker">Who we are</div><div class="intro"><h2>Rooted in faith. Grounded in people.</h2><p>A Passion For God's Glory Foundation is a growing African foundation built around a simple conviction: people should not have to face difficult seasons alone.</p><p>Our Christian faith inspires the way we serve, while our work remains welcoming to people of every faith and background. We want every person we meet to feel seen, respected and valued.</p></div><div class="pill-row"><span class="pill">Children</span><span class="pill">Women & mothers</span><span class="pill">Youth</span><span class="pill">Communities</span></div></div></div></section>
@@ -330,4 +190,4 @@ async function loadProjects(){const el=document.getElementById("projects-list");
 async function loadImpactReports(){const el=document.getElementById("reports-list");if(!el||!supabaseClient)return;const {data,error}=await supabaseClient.from("impact_reports").select("title,report_year,summary,report_url").eq("published",true).order("report_year",{ascending:false}).limit(6);if(error||!data||!data.length)return;el.innerHTML=data.map(r=>'<article class="card"><div class="icon">▤</div><h3>'+escapeHtml(r.title)+'</h3><p>'+(r.report_year?escapeHtml(String(r.report_year))+" · ":"")+escapeHtml(r.summary||"Verified impact report")+'</p>'+(r.report_url?'<a class="btn" style="margin-top:18px" target="_blank" rel="noopener" href="'+escapeHtml(r.report_url)+'">Read report</a>':"")+'</article>').join("")}
 loadProjects();loadImpactReports();
 </script>
-<script>const menu=document.querySelector(".nav-menu"),mobile=document.querySelector(".mobile-menu");menu?.addEventListener("click",()=>{const open=mobile.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));menu.textContent=open?"×":"☰"});mobile?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mobile.classList.remove("open");menu.setAttribute("aria-expanded","false");menu.textContent="☰"}));const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));</script>\n<script>(function(){const slides=[...document.querySelectorAll(".hero-slide")],dots=[...document.querySelectorAll(".hero-dot")];if(!slides.length)return;let i=0,timer;function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle("active",k===i));dots.forEach((d,k)=>d.classList.toggle("active",k===i));}function start(){clearInterval(timer);timer=setInterval(()=>show(i+1),5000)}dots.forEach((d,k)=>d.addEventListener("click",()=>{show(k);start()}));show(0);start();})();</script>\n</body></html>
+<script>const menu=document.querySelector(".nav-menu"),mobile=document.querySelector(".mobile-menu");menu?.addEventListener("click",()=>{const open=mobile.classList.toggle("open");menu.setAttribute("aria-expanded",String(open));menu.textContent=open?"×":"☰"});mobile?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mobile.classList.remove("open");menu.setAttribute("aria-expanded","false");menu.textContent="☰"}));const observer=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");observer.unobserve(e.target)}}),{threshold:.08});document.querySelectorAll(".reveal").forEach(e=>observer.observe(e));</script></body></html>
