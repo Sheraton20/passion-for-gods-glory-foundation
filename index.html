@@ -48,7 +48,89 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-</head>
+<style id="mobile-polish">
+/* Mobile-first polish: keep the entire site comfortable on small screens */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+img,svg{max-width:100%}
+.nav{padding:10px 16px;gap:8px;min-height:64px}
+.brand{min-width:0;flex:1;gap:8px}
+.brand .mark{width:40px;height:40px;min-width:40px;border-radius:12px}
+.brand-copy{min-width:0}
+.brand-name{font-size:clamp(11px,3.2vw,14px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:8px;letter-spacing:1.2px;white-space:nowrap}
+.nav>.btn{padding:10px 14px;font-size:12px;box-shadow:none}
+.nav-menu{flex:0 0 42px}
+.mobile-menu{top:64px;max-height:calc(100vh - 64px);overflow:auto}
+.hero{min-height:calc(100svh - 64px);height:auto;display:block;position:relative}
+.hero-photo{position:absolute!important;inset:0!important;width:100%;height:100%;min-height:100%!important;background-position:center center}
+.hero-photo:before{inset:10px;border-radius:22px}
+.hero-photo-frame{position:absolute!important;inset:0!important}
+.hero-copy{position:relative;z-index:2;min-height:calc(100svh - 64px)!important;height:auto;padding:92px 22px 48px!important;display:flex;justify-content:flex-end;background:linear-gradient(180deg,rgba(6,30,23,.82) 0%,rgba(6,30,23,.68) 40%,rgba(6,30,23,.90) 100%)}
+.hero-badge{top:14px;right:14px;padding:9px 11px;border-radius:14px}
+.hero-badge span{width:28px;height:28px;border-radius:9px}
+.hero-badge b{font-size:11px}
+.hero-badge small{font-size:9px}
+.eyebrow{font-size:10px;letter-spacing:2px}
+.hero-kicker{font-size:10px;line-height:1.35}
+.hero h1{font-size:clamp(42px,13vw,58px)!important;line-height:.96;letter-spacing:-1.8px!important;margin:14px 0 18px}
+.hero p{font-size:15px;line-height:1.55}
+.hero-actions{gap:9px;margin-top:23px}
+.hero-actions .btn{width:100%;min-height:48px;padding:12px 16px}
+.hero-note{margin-top:22px;font-size:11px;gap:8px;align-items:flex-start;flex-direction:column}
+.hero-pills{margin-top:18px;gap:7px}
+.hero-pills span{font-size:10px;padding:7px 10px}
+.photo-caption{left:22px!important;right:22px!important;bottom:20px!important}
+.photo-caption small{font-size:9px}
+.photo-caption strong{font-size:18px!important;max-width:100%}
+.section{padding:58px 18px!important}
+.intro h2{font-size:clamp(31px,9vw,43px);letter-spacing:-1.2px}
+.intro p{font-size:15px;line-height:1.6}
+.section>#about,.story-lead{min-width:0}
+.section>div[style*="repeat(3"]{grid-template-columns:1fr!important;gap:12px!important;margin-bottom:30px!important}
+.card{padding:23px 20px;border-radius:21px}
+.card h3{font-size:20px}
+.grid,.story-grid{grid-template-columns:1fr!important;gap:16px!important;margin-top:28px}
+.card-image{height:190px;margin:-5px -5px 18px}
+.big-photo{min-height:300px;border-radius:24px}
+.quote-box{padding:32px 24px;border-radius:24px}
+.quote-box h3{font-size:30px}
+.impact-band{padding:50px 18px}
+.impact-wrap{gap:28px}
+.impact-wrap h2{font-size:34px}
+.impact{grid-template-columns:1fr 1fr!important;gap:10px}
+.stat{padding:18px 14px;border-radius:17px}
+.stat strong{font-size:29px}
+.stat span{font-size:11px}
+.trip{padding:34px 20px!important;border-radius:24px}
+.trip h2{font-size:35px}
+.trip .grid{margin-top:25px}
+.form{padding:22px 17px;border-radius:22px;margin-top:26px}
+.form-grid{grid-template-columns:1fr!important;gap:0}
+.form label{font-size:14px;margin-bottom:15px}
+.form input,.form textarea{font-size:16px;padding:13px}
+.form>.btn{width:100%;min-height:48px}
+.donate{grid-template-columns:1fr!important;gap:14px}
+.donate-main,.donate-side{padding:32px 23px;border-radius:24px}
+.donate-main h2{font-size:36px}
+.donate-main .btn,.donate-side .btn{width:100%;margin-top:8px}
+.footer{padding:46px 18px 24px;grid-template-columns:1fr!important;gap:24px}
+.footer h3{font-size:18px}
+.footer p{font-size:14px}
+.small{font-size:11px}
+@media(max-width:380px){
+  .nav>.btn{display:none}
+  .brand-name{font-size:10.5px}
+  .brand-sub{font-size:7px}
+  .hero-copy{padding-left:18px!important;padding-right:18px!important}
+  .hero h1{font-size:40px!important}
+  .impact{grid-template-columns:1fr!important}
+}
+@media(min-width:901px){
+  .hero{display:block;min-height:92vh}
+  .hero-photo{position:absolute!important;inset:0!important;width:100%;height:100%;min-height:100%}
+  .hero-copy{min-height:92vh}
+}
+</style></head>
 <body id="top">
 <nav class="nav"><a class="brand" href="#top" aria-label="Go to homepage"><span class="mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 47S13 36 13 23c0-6 4-10 10-10 4 0 7 2 9 6 2-4 5-6 9-6 6 0 10 4 10 10 0 13-19 24-19 24Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M32 19v20M24 29h16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span><span class="brand-copy"><span class="brand-name">A Passion For God's Glory</span><span class="brand-sub">Foundation • Hope in Action</span></span></a><div class="links"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div><a class="btn" href="#donate">Give</a><button class="nav-menu" aria-label="Open menu" aria-expanded="false">☰</button><div class="mobile-menu"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div></nav>
 
