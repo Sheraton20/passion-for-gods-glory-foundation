@@ -174,3 +174,21 @@ footer{padding-top:64px}
   background-size:cover;
   background-position:center;
 }
+
+
+/* Larger landscape story cards for a stronger visual presentation. */
+.storygrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.storygrid .storyimg{
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  height:auto;
+  min-height:0;
+  max-height:none;
+  object-fit:cover;
+  object-position:center center;
+}
+@media(max-width:760px){
+  .storygrid{grid-template-columns:1fr}
+  .storygrid .storyimg{aspect-ratio:16 / 9;width:100%;height:auto}
+}
