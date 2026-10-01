@@ -33,3 +33,130 @@ footer{position:relative}
 footer:before{content:"";display:block;width:70px;height:2px;background:var(--premium-gold);margin-bottom:22px}
 .studio-media-frame{border-radius:22px!important;overflow:hidden;box-shadow:0 18px 45px rgba(6,44,36,.10)!important}
 @media(max-width:800px){.nav{min-height:68px!important}.hero{min-height:390px!important}.section{padding:68px 0!important}.cards,.grid{gap:16px}.body{min-height:0}.hero h1{line-height:1.08}.btn{padding:11px 17px}}
+
+
+/* 2026 professional visual refinement — safe additive layer */
+:root{
+  --premium-radius:22px;
+  --premium-max:1220px;
+}
+body{
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.wrap{width:min(var(--premium-max),92%)}
+.topbar{letter-spacing:.1px}
+nav{
+  background:rgba(255,255,255,.90)!important;
+  border-bottom:1px solid rgba(11,61,50,.10)!important;
+}
+.brand{letter-spacing:.1px}
+.logo{
+  border-width:1px!important;
+  box-shadow:0 6px 18px rgba(11,61,50,.12)!important;
+}
+.links a{padding:7px 0}
+.donate{
+  padding:12px 21px!important;
+  letter-spacing:.1px;
+}
+
+/* Hero: let the photography breathe while keeping text highly readable. */
+.hero{
+  min-height:720px!important;
+  background:#173f35;
+}
+.hero-media img,.hero-media video{
+  filter:saturate(.94) contrast(1.02);
+}
+.hero-overlay{
+  background:
+    linear-gradient(90deg,rgba(4,29,24,.78) 0%,rgba(6,49,39,.56) 38%,rgba(7,48,38,.20) 72%,rgba(7,48,38,.08) 100%),
+    linear-gradient(0deg,rgba(4,29,24,.42),transparent 55%);
+}
+.hero .copy{padding:145px 0 175px;max-width:820px}
+.hero h1{
+  max-width:780px;
+  font-size:clamp(44px,6vw,74px);
+  line-height:1.01;
+  margin-bottom:22px;
+}
+.hero p{font-size:17px;max-width:650px}
+.hero-badge{
+  background:rgba(5,35,29,.30)!important;
+  border-color:rgba(255,255,255,.30)!important;
+  box-shadow:0 20px 55px rgba(0,0,0,.18)!important;
+}
+.hero-media-note{
+  background:rgba(5,35,29,.22)!important;
+}
+
+/* Stronger visual hierarchy and more breathing room. */
+.section{padding:104px 0}
+.heading{margin-bottom:44px}
+.h2{letter-spacing:-.6px}
+.lead{font-size:15.5px}
+.card,.story,.involve{
+  border-radius:var(--premium-radius)!important;
+  border-color:rgba(11,61,50,.10)!important;
+}
+.card{padding:30px}
+.focusgrid,.storygrid{gap:22px}
+.story{box-shadow:0 10px 30px rgba(18,63,53,.055)}
+.storyimg{height:230px;transition:transform .45s ease}
+.story:hover .storyimg{transform:scale(1.035)}
+.icon{
+  width:52px;height:52px;border-radius:16px;
+  background:linear-gradient(145deg,#edf4ef,#e4eee8);
+}
+.aboutgrid{min-height:540px}
+.aboutimg{min-height:540px}
+.aboutcopy{padding:66px}
+.give{padding-top:96px;padding-bottom:96px}
+.givepanel{
+  border-radius:24px;
+  background:rgba(255,255,255,.10);
+  box-shadow:0 20px 55px rgba(0,0,0,.12);
+}
+.trust{margin-top:-52px}
+.trustbox{
+  border-radius:24px;
+  box-shadow:0 20px 55px rgba(16,44,36,.12);
+}
+.trustitem{padding:28px 25px}
+
+/* More polished forms and interactive states. */
+input,textarea,select{
+  border-radius:12px!important;
+  border:1px solid #dfe6e1!important;
+}
+input:hover,textarea:hover,select:hover{border-color:#c8d6ce!important}
+.btn{min-height:44px}
+.btn.gold{
+  box-shadow:0 10px 24px rgba(216,168,62,.26);
+}
+.btn.light{
+  backdrop-filter:blur(8px);
+}
+
+/* Keep public pages and the editing studio visually consistent. */
+footer{padding-top:64px}
+@media(max-width:980px){
+  .hero{min-height:680px!important}
+  .hero .copy{padding:125px 0 155px}
+  .aboutcopy{padding:52px}
+}
+@media(max-width:620px){
+  .hero{min-height:670px!important}
+  .hero-overlay{
+    background:
+      linear-gradient(90deg,rgba(4,29,24,.70),rgba(6,49,39,.40)),
+      linear-gradient(0deg,rgba(4,29,24,.50),transparent 60%);
+  }
+  .hero .copy{padding:100px 0 145px}
+  .hero h1{font-size:clamp(40px,11vw,50px)}
+  .hero p{font-size:15px;line-height:1.7}
+  .trust{margin-top:-36px}
+  .section{padding:78px 0}
+  .aboutcopy{padding:38px 28px}
+}
