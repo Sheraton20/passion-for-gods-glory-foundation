@@ -123,11 +123,16 @@ $("saveDesign").onclick=saveDesign;$("saveSettings").onclick=saveSettings;$("new
 
 async function boot(){
  setStatus("Loading secure Editing Studio…");
- if(!window.supabase){setStatus("The secure login library did not load. Check your internet connection, then refresh the page.","error");return}
+ if(!window.supabase){
+  setStatus("Loading secure login service…");
+  const started=Date.now();
+  while(!window.supabase && Date.now()-started<8000) await new Promise(r=>setTimeout(r,100));
+  if(!window.supabase){setStatus("The secure login library could not be loaded. Please refresh the Studio page and try again.","error");return}
+}
  try{
   sb=window.supabase.createClient(U,K,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
   sb.auth.onAuthStateChange((event,session)=>{if(event==="SIGNED_OUT"&&!session)showLogin()});
-  await requireAdmin();
+  await withTimeout(requireAdmin(),15000,"Studio startup");
  }catch(e){setStatus("Studio startup error: "+e.message,"error")}
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
