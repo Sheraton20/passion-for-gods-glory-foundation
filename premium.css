@@ -321,3 +321,41 @@ footer{padding-top:64px}
   .principles .trustitem strong{font-size:19px}
   .principles .trustitem span{max-width:none}
 }
+
+
+/* Principles motion — gentle, premium and accessible. */
+@keyframes principleReveal{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes principleGlow{
+  0%,100%{box-shadow:0 6px 15px rgba(216,168,62,.12)}
+  50%{box-shadow:0 10px 25px rgba(216,168,62,.22)}
+}
+.principles-heading{
+  animation:principleReveal .75s cubic-bezier(.2,.75,.25,1) both;
+}
+.principles .trustitem{
+  opacity:0;
+  animation:principleReveal .7s cubic-bezier(.2,.75,.25,1) both;
+}
+.principles .trustitem:nth-child(1){animation-delay:.10s}
+.principles .trustitem:nth-child(2){animation-delay:.20s}
+.principles .trustitem:nth-child(3){animation-delay:.30s}
+.principles .trustitem:nth-child(4){animation-delay:.40s}
+.principles .trustitem .round{
+  animation:principleGlow 2.8s ease-in-out infinite;
+}
+.principles .trustitem:nth-child(2) .round{animation-delay:.35s}
+.principles .trustitem:nth-child(3) .round{animation-delay:.70s}
+.principles .trustitem:nth-child(4) .round{animation-delay:1.05s}
+.principles .trustitem:hover .round{
+  transform:scale(1.08) rotate(4deg);
+  transition:transform .25s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  .principles-heading,.principles .trustitem,.principles .trustitem .round{
+    animation:none!important;
+    opacity:1;
+  }
+}
