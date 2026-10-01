@@ -627,3 +627,8 @@ body{font-size:16px}
     animation:none!important;transform:none!important;filter:none!important;
   }
 }
+
+
+/* Give the principles heading more breathing room from the hero. */
+.principles{padding-top:42px}
+@media(max-width:620px){.principles{padding-top:32px}}
