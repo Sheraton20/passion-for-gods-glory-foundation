@@ -663,3 +663,5 @@ body{font-size:16px}
 .team-body p{margin:0;color:var(--premium-muted);font-size:14px;line-height:1.75}
 @media(max-width:980px){.teamgrid{grid-template-columns:1fr 1fr}.team-card:last-child{grid-column:1/-1;max-width:calc(50% - 11px);margin:auto}}
 @media(max-width:620px){.team-section{padding:72px 0}.teamgrid{grid-template-columns:1fr}.team-card:last-child{grid-column:auto;max-width:none}.team-photo{height:230px}.team-body{padding:24px}.team-body h3{font-size:23px}}
+
+.team-heading .btn{margin-top:18px}.team-photo-live{background:#edf3ef}.team-photo-live:after{background:linear-gradient(180deg,rgba(11,61,50,.03),rgba(11,61,50,.16))}.team-photo-live img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
