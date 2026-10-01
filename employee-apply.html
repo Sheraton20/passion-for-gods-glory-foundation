@@ -38,7 +38,7 @@ body{margin:0;background:#fbf8f0;color:#18312b;font-family:Inter,system-ui,sans-
 (()=>{const U="https://azxiopurzajxjksvzvjm.supabase.co",K="sb_publishable_G_WkfZ2z48Zf6ZkVS6o1Fg_htFQWLTZ";
 const form=document.getElementById("employeeForm"),photo=document.getElementById("photo"),preview=document.getElementById("photoPreview"),status=document.getElementById("status"),btn=document.getElementById("submitBtn"),pdfBtn=document.getElementById("pdfBtn"),afterPdfBtn=document.getElementById("afterPdfBtn"),afterSubmit=document.getElementById("afterSubmit");
 let lastSnapshot=null;
-const esc=s=>String(s||"").replace(/[^\\w.-]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"").slice(0,80);
+const esc=s=>String(s||"").replace(/[^\w.-]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"").slice(0,80);
 const value=id=>document.getElementById(id)?.value?.trim()||"";
 function snapshot(){
   return {full_name:value("full_name"),email:value("email"),phone:value("phone"),position:value("position"),department:value("department"),bio:value("bio"),photo:photo.files?.[0]||null};
@@ -91,13 +91,18 @@ function msg(t,c){status.textContent=t;status.className="status "+(c||"")}
 pdfBtn.addEventListener("click",()=>downloadPdf(snapshot()).catch(()=>msg("Could not create the PDF. Please try again.","error")));afterPdfBtn.addEventListener("click",()=>lastSnapshot&&downloadPdf(lastSnapshot).catch(()=>msg("Could not create the PDF. Please try again.","error")));\nphoto.addEventListener("change",()=>{const f=photo.files?.[0];if(!f)return;if(f.size>5*1024*1024){photo.value="";status.textContent="Please choose an image under 5 MB.";status.className="status error";return}const u=URL.createObjectURL(f);preview.src=u;preview.style.display="block";status.textContent=""});
 form.addEventListener("submit",async e=>{e.preventDefault();status.className="status";status.textContent="Submitting your application…";btn.disabled=true;
 try{const f=photo.files?.[0];if(!f)throw new Error("Please choose a profile picture.");if(f.size>5*1024*1024)throw new Error("Please choose an image under 5 MB.");
-const id=crypto.randomUUID(),ext=(f.name.split(".").pop()||"jpg").toLowerCase(),path="applications/"+id+"-"+esc(f.name.replace(/\\.[^.]+$/,""))+"."+ext;
-const up=await fetch(U+"/storage/v1/object/employee-photos/"+path,{method:"POST",headers:{apikey:K,Authorization:"Bearer "+K,"Content-Type":f.type||"image/jpeg","x-upsert":"false"},body:f});
-if(!up.ok)throw new Error("The photo could not be uploaded. Please try again.");
-const photoUrl=U+"/storage/v1/object/public/employee-photos/"+path;
-const payload={id,full_name:document.getElementById("full_name").value.trim(),email:document.getElementById("email").value.trim(),phone:document.getElementById("phone").value.trim()||null,position:document.getElementById("position").value.trim(),department:document.getElementById("department").value.trim()||null,bio:document.getElementById("bio").value.trim(),photo_url:photoUrl,photo_path:path,status:"pending"};
-const ins=await fetch(U+"/rest/v1/employee_applications",{method:"POST",headers:{apikey:K,Authorization:"Bearer "+K,"Content-Type":"application/json","Prefer":"return=minimal"},body:JSON.stringify(payload)});
-if(!ins.ok)throw new Error("The application could not be saved. Please try again.");
+const endpoint=U+"/functions/v1/employee-application";
+const fd=new FormData();
+fd.append("full_name",value("full_name"));
+fd.append("email",value("email"));
+fd.append("phone",value("phone"));
+fd.append("position",value("position"));
+fd.append("department",value("department"));
+fd.append("bio",value("bio"));
+fd.append("photo",f,f.name);
+const ins=await fetch(endpoint,{method:"POST",headers:{apikey:K},body:fd});
+let result={};try{result=await ins.json()}catch(e){}
+if(!ins.ok)throw new Error(result.error||"The application could not be submitted. Please try again.");
 lastSnapshot={...snapshot(),photo:f};afterSubmit.hidden=false;status.textContent="Application submitted successfully. It will appear on the team page after approval.";status.className="status success";
 }catch(err){status.textContent=err.message||"Something went wrong. Please try again.";status.className="status error"}finally{btn.disabled=false}});
 })();
