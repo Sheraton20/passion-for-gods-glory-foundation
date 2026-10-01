@@ -375,3 +375,45 @@ footer{padding-top:64px}
   .principles .trustitem span{font-size:14px;line-height:1.65}
   .principles .round{width:48px;height:48px}
 }
+
+/* Site-wide readability refinement — comfortable typography across all sections. */
+body{font-size:16px}
+.topbar{font-size:13px}
+.links{font-size:14px}
+.brandname{font-size:17px}
+.brand small{font-size:9px}
+.donate{font-size:13px}
+.hero .eyebrow,.eyebrow{font-size:13px}
+.hero p{font-size:18px}
+.btn{font-size:14px}
+.kicker{font-size:13px}
+.h2{font-size:clamp(34px,4.2vw,48px)}
+.lead{font-size:16px;line-height:1.8}
+.card h3{font-size:24px}
+.card p{font-size:15px}
+.arrow{font-size:13px}
+.storybody small{font-size:11px}
+.storybody h3{font-size:25px}
+.storybody p{font-size:15px}
+.aboutcopy p{font-size:15px}
+.pillar strong{font-size:13px}
+.pillar span{font-size:12px}
+.givepanel h3{font-size:27px}
+.givepanel p,.way{font-size:14px}
+.involve h3{font-size:27px}
+.involve p{font-size:15px}
+.transparency{font-size:13px}
+.foot p,.foot a{font-size:13px}
+@media(max-width:620px){
+ body{font-size:15px}
+ .brandname{font-size:14px}
+ .hero p{font-size:16px}
+ .kicker{font-size:12px}
+ .h2{font-size:34px}
+ .lead{font-size:15px}
+ .card h3{font-size:23px}
+ .card p,.storybody p,.aboutcopy p,.involve p{font-size:14px}
+ .storybody h3,.involve h3{font-size:24px}
+ .givepanel p{font-size:14px}
+ .foot p,.foot a{font-size:13px}
+}
