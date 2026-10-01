@@ -160,3 +160,22 @@ footer{padding-top:64px}
   .section{padding:78px 0}
   .aboutcopy{padding:38px 28px}
 }
+
+
+/* Story cards: keep Children, Families and Community photos full-width and horizontal. */
+.storygrid .storyimg{
+  display:block;
+  width:100%;
+  height:230px;
+  min-height:230px;
+  object-fit:cover;
+  object-position:center center;
+  background-size:cover;
+  background-position:center;
+}
+@media(max-width:620px){
+  .storygrid .storyimg{
+    height:210px;
+    min-height:210px;
+  }
+}
