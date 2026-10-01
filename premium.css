@@ -517,3 +517,113 @@ body{font-size:16px}
     transform:none!important;
   }
 }
+
+
+/* Signature principles motion — distinctive, elegant and lightweight. */
+.principles .trustitem{
+  isolation:isolate;
+  overflow:visible;
+}
+.principles .trustitem:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:22%;
+  width:3px;
+  height:56%;
+  border-radius:99px;
+  background:linear-gradient(180deg,transparent,var(--premium-gold),transparent);
+  opacity:0;
+  transform:scaleY(.35);
+  transition:opacity .35s ease,transform .5s cubic-bezier(.2,.8,.2,1);
+}
+.principles .trustitem:hover:before{
+  opacity:1;
+  transform:scaleY(1);
+}
+@keyframes principleWordLift{
+  0%{opacity:0;transform:translateY(14px);filter:blur(4px)}
+  55%{opacity:1;transform:translateY(-2px);filter:blur(0)}
+  100%{opacity:1;transform:translateY(0);filter:blur(0)}
+}
+@keyframes principleWordGlow{
+  0%,100%{text-shadow:0 0 0 rgba(216,168,62,0)}
+  50%{text-shadow:0 5px 20px rgba(216,168,62,.18)}
+}
+@keyframes principleHalo{
+  0%{transform:rotate(0deg) scale(.92);opacity:.15}
+  50%{transform:rotate(180deg) scale(1.05);opacity:.42}
+  100%{transform:rotate(360deg) scale(.92);opacity:.15}
+}
+@keyframes principleDotTravel{
+  0%{transform:rotate(0deg) translateX(31px) scale(.7);opacity:.15}
+  50%{transform:rotate(180deg) translateX(31px) scale(1);opacity:.75}
+  100%{transform:rotate(360deg) translateX(31px) scale(.7);opacity:.15}
+}
+@keyframes principleNumberBreath{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.075)}
+}
+.principles .trustitem strong{
+  animation:principleWordLift .8s cubic-bezier(.2,.8,.2,1) both,
+             principleWordGlow 3.8s ease-in-out infinite .8s;
+}
+.principles .trustitem span{
+  animation:principleWordLift .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.principles .trustitem:nth-child(1) strong,.principles .trustitem:nth-child(1) span{animation-delay:.05s}
+.principles .trustitem:nth-child(2) strong,.principles .trustitem:nth-child(2) span{animation-delay:.22s}
+.principles .trustitem:nth-child(3) strong,.principles .trustitem:nth-child(3) span{animation-delay:.39s}
+.principles .trustitem:nth-child(4) strong,.principles .trustitem:nth-child(4) span{animation-delay:.56s}
+
+.principles .round{
+  z-index:1;
+  animation:principleNumberBreath 3.2s ease-in-out infinite;
+  box-shadow:0 8px 22px rgba(16,44,36,.10);
+}
+.principles .round:before{
+  content:"";
+  position:absolute;
+  inset:-9px;
+  border:1px solid currentColor;
+  border-left-color:transparent;
+  border-bottom-color:transparent;
+  border-radius:50%;
+  opacity:.34;
+  animation:principleHalo 5s linear infinite;
+  pointer-events:none;
+}
+.principles .round:after{
+  inset:-13px;
+  border:0;
+  border-radius:50%;
+  box-shadow:0 0 0 1px currentColor;
+  opacity:.18;
+  animation:principleDotTravel 4.2s linear infinite;
+}
+.principles .trustitem:nth-child(2) .round{animation-delay:.35s}
+.principles .trustitem:nth-child(3) .round{animation-delay:.7s}
+.principles .trustitem:nth-child(4) .round{animation-delay:1.05s}
+.principles .trustitem:nth-child(2) .round:before{animation-delay:.8s}
+.principles .trustitem:nth-child(3) .round:before{animation-delay:1.6s}
+.principles .trustitem:nth-child(4) .round:before{animation-delay:2.4s}
+.principles .trustitem:nth-child(2) .round:after{animation-delay:.8s}
+.principles .trustitem:nth-child(3) .round:after{animation-delay:1.6s}
+.principles .trustitem:nth-child(4) .round:after{animation-delay:2.4s}
+
+.principles .trustitem:hover strong{
+  color:#0b3d32;
+  text-shadow:0 6px 24px rgba(11,61,50,.14);
+  transform:translateX(4px);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),color .25s ease;
+}
+.principles .trustitem:hover .round{
+  transform:scale(1.13);
+  box-shadow:0 14px 34px rgba(11,61,50,.16),0 0 0 7px rgba(216,168,62,.08);
+}
+@media(prefers-reduced-motion:reduce){
+  .principles .trustitem strong,.principles .trustitem span,.principles .round,
+  .principles .round:before,.principles .round:after{
+    animation:none!important;transform:none!important;filter:none!important;
+  }
+}
