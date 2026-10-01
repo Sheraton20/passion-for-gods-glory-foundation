@@ -14,3 +14,5 @@ http.createServer((req,res)=>{
   res.writeHead(200,{'Content-Type':types[ext]||'application/octet-stream','Cache-Control':'no-cache'});fs.createReadStream(f).pipe(res);
 }).listen(port,'0.0.0.0',()=>console.log('Foundation website listening on '+port+'; index='+findIndex()));
 // Railway deployment trigger: serve the verified foundation homepage from the repository root.
+
+// Keep the connected Railway service synchronized with the latest main branch.
