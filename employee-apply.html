@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/premium.css?v=20261002-3">
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
 <style>
 body{margin:0;background:#fbf8f0;color:#18312b;font-family:Inter,system-ui,sans-serif}.apply-shell{max-width:900px;margin:0 auto;padding:42px 20px 80px}.apply-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:42px}.apply-brand{font-weight:900;letter-spacing:.8px;color:#0b3d32;text-decoration:none}.back{color:#0b3d32;text-decoration:none;font-weight:700;font-size:13px}.apply-hero{text-align:center;max-width:700px;margin:0 auto 30px}.kicker{color:#a97c23;font-size:12px;letter-spacing:2.4px;font-weight:900}.apply-hero h1{margin:10px 0;color:#0b3d32;font:700 clamp(38px,6vw,58px)/1.08 "Playfair Display",Georgia,serif}.apply-hero p{color:#66756f;line-height:1.8}.form-card{background:#fff;border:1px solid rgba(11,61,50,.1);border-radius:28px;padding:32px;box-shadow:0 24px 70px rgba(16,44,36,.1)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.field{display:flex;flex-direction:column;gap:8px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800;color:#18312b}.field input,.field select,.field textarea{width:100%;box-sizing:border-box;border:1px solid #dfe6e1;border-radius:12px;padding:13px 14px;font:inherit;color:#18312b;background:#fff;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:#b38a36;box-shadow:0 0 0 4px rgba(216,168,62,.1)}.field textarea{min-height:125px;resize:vertical}.photo-box{border:1.5px dashed #b8c9c0;border-radius:18px;padding:22px;text-align:center;background:#f8faf8}.photo-box input{max-width:100%}.photo-preview{display:none;width:120px;height:120px;object-fit:cover;border-radius:50%;margin:0 auto 14px;border:4px solid #fff;box-shadow:0 8px 24px rgba(16,44,36,.15)}.photo-help{font-size:12px;color:#66756f;line-height:1.6;margin:8px 0 0}.submit-row{display:flex;align-items:center;gap:16px;margin-top:24px}.submit{border:0;border-radius:999px;padding:14px 23px;background:#d8a83e;color:#17382f;font-weight:900;cursor:pointer}.secondary-action{background:#0b3d32;color:#fff}.after-submit{margin-top:22px;padding:18px 20px;border-radius:16px;background:#f1f6f2;border:1px solid #dce8df;display:grid;gap:8px;color:#18312b}.after-submit span{font-size:13px;color:#66756f;line-height:1.6}.after-submit .submit{width:max-content;margin-top:4px}.submit:disabled{opacity:.55;cursor:not-allowed}.status{font-size:13px;color:#66756f}.status.success{color:#17604d}.status.error{color:#9a3f32}.privacy{font-size:11px;color:#78857f;line-height:1.7;margin-top:20px}@media(max-width:650px){.apply-shell{padding:26px 15px 60px}.apply-nav{margin-bottom:30px}.form-card{padding:22px;border-radius:22px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.submit-row{align-items:flex-start;flex-direction:column}.submit{width:100%}}
 </style>
@@ -47,9 +47,34 @@ async function imageData(file){
   if(!file)return null;
   return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const c=document.createElement("canvas"),m=1000,s=Math.min(1,m/Math.max(img.width,img.height));c.width=Math.max(1,Math.round(img.width*s));c.height=Math.max(1,Math.round(img.height*s));c.getContext("2d").drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.9))};img.onerror=reject;img.src=r.result};r.onerror=reject;r.readAsDataURL(file)});
 }
+async function ensurePdfLibrary(){
+  if(window.jspdf?.jsPDF)return window.jspdf.jsPDF;
+  const urls=[
+    "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js",
+    "https://unpkg.com/jspdf@2.5.2/dist/jspdf.umd.min.js"
+  ];
+  for(const src of urls){
+    try{
+      await new Promise((resolve,reject)=>{
+        const s=document.createElement("script");
+        s.src=src;s.async=true;s.onload=resolve;s.onerror=reject;
+        document.head.appendChild(s);
+      });
+      if(window.jspdf?.jsPDF)return window.jspdf.jsPDF;
+    }catch(e){}
+  }
+  return null;
+}
+function printApplication(data){
+  const w=window.open("","_blank","noopener,noreferrer");
+  if(!w){throw new Error("Your browser blocked the PDF window. Please allow pop-ups for this site and try again.");}
+  const escHtml=s=>String(s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+  w.document.write("<!doctype html><html><head><title>Employee Application - "+escHtml(data.full_name)+"</title><style>@page{size:A4;margin:18mm}body{font-family:Arial,sans-serif;color:#18312b}h1{font-size:22px;margin:0 0 6px}h2{font-size:14px;margin:24px 0 8px;color:#0b3d32}.head{background:#0b3d32;color:#fff;padding:18px;margin:-18mm -18mm 24px}.meta{line-height:1.8}.bio{white-space:pre-wrap;line-height:1.7}.line{display:inline-block;width:180px;border-bottom:1px solid #555;margin:35px 35px 0 0}</style></head><body><div class='head'><strong>A PASSION FOR GOD'S GLORY FOUNDATION</strong><div>EMPLOYEE APPLICATION</div></div><h1>"+escHtml(data.full_name)+"</h1><div class='meta'><b>Email:</b> "+escHtml(data.email)+"<br><b>Phone:</b> "+escHtml(data.phone||"Not provided")+"<br><b>Position:</b> "+escHtml(data.position)+"<br><b>Department:</b> "+escHtml(data.department||"Not specified")+"</div><h2>Professional Bio</h2><div class='bio'>"+escHtml(data.bio)+"</div><h2>Applicant Declaration</h2><p>I confirm that the information in this application is accurate to the best of my knowledge.</p><span class='line'></span><span class='line'></span><div><small>Applicant signature</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>Date</small></div><script>window.onload=()=>setTimeout(()=>window.print(),300)</script></body></html>");
+  w.document.close();
+}
 async function downloadPdf(data){
   if(!data.full_name||!data.email||!data.position||!data.bio||!data.photo){msg("Please complete the required fields and choose your photo before downloading the PDF.","error");return}
-  const {jsPDF}=window.jspdf||{}; if(!jsPDF){msg("PDF service is still loading. Please try again.","error");return}
+  const jsPDF=await ensurePdfLibrary(); if(!jsPDF){msg("The direct PDF download service could not load. Opening the printable PDF version instead…",""); printApplication(data); return}
   const doc=new jsPDF({unit:"mm",format:"a4"}),W=210;
   doc.setFillColor(11,61,50);doc.rect(0,0,W,30,"F");doc.setTextColor(255,255,255);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.text("A PASSION FOR GOD'S GLORY FOUNDATION",16,13);doc.setFontSize(9);doc.setFont("helvetica","normal");doc.text("EMPLOYEE APPLICATION",16,22);
   let y=43; const img=await imageData(data.photo); if(img){doc.addImage(img,"JPEG",155,38,34,34);doc.setDrawColor(216,168,62);doc.circle(172,55,17,"S")}
