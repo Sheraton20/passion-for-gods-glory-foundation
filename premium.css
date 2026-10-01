@@ -417,3 +417,103 @@ body{font-size:16px}
  .givepanel p{font-size:14px}
  .foot p,.foot a{font-size:13px}
 }
+
+
+/* Principles — animated words and elegant numbered circles. */
+@keyframes principleTextFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+@keyframes principleNumberOrbit{
+  0%{transform:translateY(0) rotate(0deg) scale(1)}
+  25%{transform:translateY(-5px) rotate(-3deg) scale(1.04)}
+  50%{transform:translateY(0) rotate(0deg) scale(1.08)}
+  75%{transform:translateY(4px) rotate(3deg) scale(1.04)}
+  100%{transform:translateY(0) rotate(0deg) scale(1)}
+}
+@keyframes principleRingPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(216,168,62,.16),0 8px 20px rgba(16,44,36,.10)}
+  50%{box-shadow:0 0 0 9px rgba(216,168,62,0),0 12px 28px rgba(16,44,36,.16)}
+}
+@keyframes principleTextShimmer{
+  0%,100%{letter-spacing:0}
+  50%{letter-spacing:.35px}
+}
+.principles .trustitem strong{
+  display:block;
+  animation:principleTextFloat 3.4s ease-in-out infinite;
+}
+.principles .trustitem span{
+  animation:principleTextFloat 3.8s ease-in-out infinite;
+}
+.principles .trustitem:nth-child(2) strong,
+.principles .trustitem:nth-child(2) span{animation-delay:.45s}
+.principles .trustitem:nth-child(3) strong,
+.principles .trustitem:nth-child(3) span{animation-delay:.9s}
+.principles .trustitem:nth-child(4) strong,
+.principles .trustitem:nth-child(4) span{animation-delay:1.35s}
+
+.principles .round{
+  position:relative;
+  overflow:visible;
+  animation:
+    principleNumberOrbit 3.6s ease-in-out infinite,
+    principleRingPulse 2.8s ease-in-out infinite;
+  border-width:1.5px;
+}
+.principles .round:after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border:1px solid currentColor;
+  border-radius:50%;
+  opacity:.16;
+  animation:principleRingPulse 2.8s ease-in-out infinite;
+}
+.principles .trustitem:nth-child(1) .round{
+  background:linear-gradient(145deg,#f8efd7,#ead8a8);
+  color:#9a701c;
+  border-color:#d8b45b;
+}
+.principles .trustitem:nth-child(2) .round{
+  background:linear-gradient(145deg,#e4f1eb,#bcd9cc);
+  color:#17604d;
+  border-color:#8bbca8;
+  animation-delay:.35s;
+}
+.principles .trustitem:nth-child(3) .round{
+  background:linear-gradient(145deg,#e7edf5,#c5d5e8);
+  color:#355b83;
+  border-color:#91aaca;
+  animation-delay:.7s;
+}
+.principles .trustitem:nth-child(4) .round{
+  background:linear-gradient(145deg,#f1e6ed,#dfc5d5);
+  color:#784d68;
+  border-color:#bd8eaa;
+  animation-delay:1.05s;
+}
+.principles .trustitem:nth-child(1) .round:after{animation-delay:0s}
+.principles .trustitem:nth-child(2) .round:after{animation-delay:.35s}
+.principles .trustitem:nth-child(3) .round:after{animation-delay:.7s}
+.principles .trustitem:nth-child(4) .round:after{animation-delay:1.05s}
+
+.principles .trustitem:hover strong{
+  animation:principleTextShimmer .7s ease-in-out;
+}
+.principles .trustitem:hover span{
+  transform:translateY(-2px);
+  transition:transform .25s ease;
+}
+.principles .trustitem:hover .round{
+  animation-duration:1.8s;
+}
+@media(prefers-reduced-motion:reduce){
+  .principles .trustitem strong,
+  .principles .trustitem span,
+  .principles .round,
+  .principles .round:after{
+    animation:none!important;
+    transform:none!important;
+  }
+}
