@@ -130,7 +130,62 @@ img,svg{max-width:100%}
   .hero-photo{position:absolute!important;inset:0!important;width:100%;height:100%;min-height:100%}
   .hero-copy{min-height:92vh}
 }
-</style>\n<style id="hero-slideshow-polish">.hero-photo{overflow:hidden}.hero-slideshow{position:absolute;inset:0;z-index:0}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity 1.2s ease,transform 7s ease}.hero-slide.active{opacity:1;transform:scale(1)}.hero-photo-frame{z-index:1}.hero-badge,.photo-caption{z-index:3}.hero-dots{position:absolute;z-index:4;right:42px;bottom:38px;display:flex;gap:7px;padding:8px 10px;border-radius:999px;background:rgba(8,38,30,.45);backdrop-filter:blur(10px)}.hero-dot{width:7px;height:7px;padding:0;border:1px solid rgba(255,255,255,.75);border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.3)}@media(max-width:900px){.hero-dots{right:20px;bottom:20px}.hero-dot{width:6px;height:6px}.hero-photo{min-height:100%!important}}@media(max-width:520px){.hero-dots{right:18px;bottom:16px;padding:7px 9px;gap:6px}.hero-dot{width:6px;height:6px}}</style>\n</head>
+</style>\n<style id="hero-slideshow-polish">.hero-photo{overflow:hidden}.hero-slideshow{position:absolute;inset:0;z-index:0}.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.04);transition:opacity 1.2s ease,transform 7s ease}.hero-slide.active{opacity:1;transform:scale(1)}.hero-photo-frame{z-index:1}.hero-badge,.photo-caption{z-index:3}.hero-dots{position:absolute;z-index:4;right:42px;bottom:38px;display:flex;gap:7px;padding:8px 10px;border-radius:999px;background:rgba(8,38,30,.45);backdrop-filter:blur(10px)}.hero-dot{width:7px;height:7px;padding:0;border:1px solid rgba(255,255,255,.75);border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer}.hero-dot.active{background:#fff;transform:scale(1.3)}@media(max-width:900px){.hero-dots{right:20px;bottom:20px}.hero-dot{width:6px;height:6px}.hero-photo{min-height:100%!important}}@media(max-width:520px){.hero-dots{right:18px;bottom:16px;padding:7px 9px;gap:6px}.hero-dot{width:6px;height:6px}}</style>\n<style id="responsive-device-layout">
+/* Professional responsive layouts: desktop, tablet and phone */
+.container,.section{width:100%}
+@media (min-width:1200px){
+  .nav{padding-left:6%;padding-right:6%}
+  .hero-copy{padding-left:9%;padding-right:6%}
+  .hero h1{font-size:clamp(64px,6vw,94px)}
+  .section{padding-left:6%;padding-right:6%;max-width:1440px}
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .story-grid{grid-template-columns:1.15fr .85fr 1fr}
+}
+@media (min-width:769px) and (max-width:1199px){
+  .nav{padding:12px 4%;gap:12px}
+  .links{gap:12px;font-size:12px}
+  .nav>.btn{padding:11px 16px}
+  .hero{min-height:760px}
+  .hero-copy{min-height:760px;padding:100px 6% 80px}
+  .hero h1{font-size:clamp(52px,6.5vw,76px);letter-spacing:-3px}
+  .hero p{font-size:17px;max-width:590px}
+  .hero-badge{right:26px;top:26px}
+  .photo-caption{left:58%;right:28px;bottom:34px}
+  .section{padding:78px 5%}
+  .story-lead{grid-template-columns:1fr 1fr;gap:30px}
+  .big-photo{min-height:420px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .story-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .story-grid .story:last-child{grid-column:1/-1;max-width:calc(50% - 9px)}
+  .impact-wrap{grid-template-columns:1fr 1.4fr;gap:30px}
+  .trip{padding:48px}
+  .footer{grid-template-columns:2fr 1fr 1fr;padding-left:5%;padding-right:5%}
+}
+@media (max-width:768px){
+  .nav{padding:10px 16px}
+  .links{display:none}
+  .hero{display:block;min-height:calc(100svh - 64px)}
+  .hero-photo{position:absolute!important;inset:0!important;height:100%!important;min-height:100%!important}
+  .hero-copy{min-height:calc(100svh - 64px)!important;padding:94px 20px 50px!important;justify-content:flex-end;background:linear-gradient(180deg,rgba(6,30,23,.55),rgba(6,30,23,.72) 45%,rgba(6,30,23,.94))}
+  .hero h1{font-size:clamp(43px,13vw,58px);letter-spacing:-2px}
+  .hero p{font-size:15px;line-height:1.55}
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .hero-actions .btn{width:100%}
+  .hero-badge{top:14px;right:14px}
+  .photo-caption{left:20px!important;right:20px!important;bottom:20px!important}
+  .hero-dots{right:18px;bottom:16px}
+  .section{padding:56px 17px!important}
+  .story-lead,.donate,.impact-wrap{grid-template-columns:1fr}
+  .grid,.story-grid{grid-template-columns:1fr!important}
+  .story-grid .story:last-child{max-width:none;grid-column:auto}
+  .big-photo{min-height:300px}
+  .impact{grid-template-columns:1fr 1fr!important}
+  .trip{padding:34px 20px!important}
+  .trip .grid{grid-template-columns:1fr!important}
+  .form-grid{grid-template-columns:1fr!important}
+  .footer{grid-template-columns:1fr!important}
+}
+</style></head>
 <body id="top">
 <nav class="nav"><a class="brand" href="#top" aria-label="Go to homepage"><span class="mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M32 47S13 36 13 23c0-6 4-10 10-10 4 0 7 2 9 6 2-4 5-6 9-6 6 0 10 4 10 10 0 13-19 24-19 24Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M32 19v20M24 29h16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span><span class="brand-copy"><span class="brand-name">A Passion For God's Glory</span><span class="brand-sub">Foundation • Hope in Action</span></span></a><div class="links"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div><a class="btn" href="#donate">Give</a><button class="nav-menu" aria-label="Open menu" aria-expanded="false">☰</button><div class="mobile-menu"><a href="#about">About</a><a href="#programs">Our Work</a><a href="#projects">Projects</a><a href="#mission-trips">Mission Trips</a><a href="#stories">Stories</a><a href="#reports">Reports</a><a href="#volunteer">Volunteer</a><a href="#contact">Contact</a></div></nav>
 
