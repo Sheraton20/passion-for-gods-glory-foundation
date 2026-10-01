@@ -5,6 +5,8 @@ function findIndex(){for(const root of roots){const f=path.join(root,'index.html
 http.createServer((req,res)=>{
   let requestPath=req.url.split('?')[0];
   if(requestPath==='/'||requestPath==='') requestPath='/index.html';
+  // Friendly routes for the private administration page.
+  if(requestPath==='/admin'||requestPath==='/admin/'||requestPath==='/dashboard'||requestPath==='/dashboard/') requestPath='/admin.html';
   let f=null;
   for(const root of roots){const candidate=path.resolve(root,'.'+requestPath);if(candidate.startsWith(path.resolve(root))&&fs.existsSync(candidate)&&fs.statSync(candidate).isFile()){f=candidate;break;}}
   if(!f&&requestPath==='/index.html') f=findIndex();
