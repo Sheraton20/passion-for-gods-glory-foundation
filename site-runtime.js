@@ -34,15 +34,15 @@ for(const r of rows){
   if(r.is_visible===false)m.visible=false;
  }
  backgrounds.forEach(container=>{
-  const img=container.querySelector('img[data-site-background-media="'+CSS.escape(key)+'"]');
-  const video=container.querySelector('video[data-site-background-media="'+CSS.escape(key)+'"]');
+  const img=[...container.querySelectorAll("img[data-site-background-media]")].find(e=>e.getAttribute("data-site-background-media")===key);
+  const video=[...container.querySelectorAll("video[data-site-background-media]")].find(e=>e.getAttribute("data-site-background-media")===key);
   if(r.content_type==="image"&&img){img.src=r.content_value;img.classList.remove("hidden");if(video){video.pause();video.removeAttribute("src");video.classList.add("hidden")}}
   else if(r.content_type==="video"&&video){video.src=r.content_value;video.classList.remove("hidden");video.muted=true;video.loop=true;video.autoplay=true;video.load();const p=video.play();if(p&&p.catch)p.catch(()=>{});if(img)img.classList.add("hidden")}
  });
  mediaContainers.forEach(container=>{
   container.classList.remove("hidden");
-  const img=container.querySelector("img[data-site-key=\""+key+"\"]");
-  const video=container.querySelector("video[data-site-key=\""+key+"\"]");
+  const img=[...container.querySelectorAll("img[data-site-key]")].find(e=>e.getAttribute("data-site-key")===key);
+  const video=[...container.querySelectorAll("video[data-site-key]")].find(e=>e.getAttribute("data-site-key")===key);
   if(img)img.classList.toggle("hidden",r.content_type!=="image");
   if(video)video.classList.toggle("hidden",r.content_type!=="video");
  });
