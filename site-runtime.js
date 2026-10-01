@@ -12,7 +12,18 @@ h1,.h2,.card h3,.storybody h3,.involve h3,.aboutcopy .h2{color:var(--studio-prim
 .studio-media-feature .studio-media-frame{max-width:980px;margin-top:20px;border-radius:20px;overflow:hidden;background:#e9efec;border:1px solid var(--line);box-shadow:0 18px 50px rgba(16,44,36,.10)}.studio-media-feature img,.studio-media-feature video{display:block;width:100%;max-height:620px;object-fit:cover}.studio-media-feature video{background:#111}@keyframes studioSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes studioZoom{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}@keyframes studioFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}`;document.head.appendChild(s)}}
 async function getJson(path){const r=await fetch(U+path,{headers:{apikey:K,Authorization:"Bearer "+K,Accept:"application/json"}});if(!r.ok)throw new Error("Studio sync HTTP "+r.status);return r.json()}
 function setLogo(url){if(!url)return;document.querySelectorAll(".logo").forEach(e=>{e.style.backgroundImage="url('"+url.replace(/'/g,"%27")+"')";e.style.backgroundSize="cover";e.style.backgroundPosition="center";e.style.color="transparent";e.textContent=""})}
-async function load(){try{const settings=await getJson("/rest/v1/site_settings?select=*&id=eq.true&limit=1");const x=settings[0];if(x){applyTheme(x.active_theme,x.animation_preset);if(x.site_title)document.title=x.site_title;if(x.tagline)document.querySelectorAll("[data-site-tagline]").forEach(e=>e.textContent=x.tagline);setLogo(x.logo_url);if(x.favicon_url){let f=document.querySelector('link[rel="icon"]');if(!f){f=document.createElement("link");f.rel="icon";document.head.appendChild(f)}f.href=x.favicon_url}}const page=(location.pathname.split("/").pop().replace(/\.html$/,"")||"home");const rows=await getJson("/rest/v1/site_content?select=section,content_key,content_value,content_type&page=eq."+encodeURIComponent(page));for(const r of rows){const key=r.section+"."+r.content_key;
+async function load(){try{const settings=await getJson("/rest/v1/site_settings?select=*&id=eq.true&limit=1");const x=settings[0];if(x){applyTheme(x.active_theme,x.animation_preset);if(x.site_title)document.title=x.site_title;if(x.tagline)document.querySelectorAll("[data-site-tagline]").forEach(e=>e.textContent=x.tagline);setLogo(x.logo_url);if(x.favicon_url){let f=document.querySelector('link[rel="icon"]');if(!f){f=document.createElement("link");f.rel="icon";document.head.appendChild(f)}f.href=x.favicon_url}}const page=(location.pathname.split("/").pop().replace(/\.html$/,"")||"home");const rows=await getJson("/rest/v1/site_content?select=section,content_key,content_value,content_type,sort_order,is_visible&page=eq."+encodeURIComponent(page));const focusCards=[...document.querySelectorAll("[data-site-card]")];
+const focusMeta=new Map();
+for(const r of rows){
+ const key=r.section+"."+r.content_key;
+ if(r.section==="focus"&&r.content_key.startsWith("card.")){
+  const p=r.content_key.split(".");
+  const id=p[1];
+  if(!focusMeta.has(id))focusMeta.set(id,{order:r.sort_order??999,visible:r.is_visible!==false});
+  const m=focusMeta.get(id);
+  m.order=Math.min(m.order,r.sort_order??999);
+  if(r.is_visible===false)m.visible=false;
+ }
 document.querySelectorAll('[data-site-background="'+CSS.escape(key)+'"]').forEach(container=>{
  const media=container.querySelector('[data-site-background-media="'+CSS.escape(key)+'"]');
  const img=container.querySelector('img[data-site-background-media="'+CSS.escape(key)+'"]');
@@ -26,4 +37,6 @@ document.querySelectorAll('[data-site-key="'+CSS.escape(key)+'"]').forEach(e=>{
  else if(r.content_type==="video"){if(e.tagName==="VIDEO"){e.src=r.content_value;e.load()}else{e.style.backgroundImage="url('"+r.content_value.replace(/'/g,"%27")+"')"}}
  else if(r.content_type==="url"&&e.tagName==="A")e.href=r.content_value;
  else e.textContent=r.content_value
-})}}catch(e){console.warn("Editing Studio sync skipped:",e.message)}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",load,{once:true});else load()})();
+}
+focusCards.sort((a,b)=>(focusMeta.get(a.dataset.siteCard)?.order??999)-(focusMeta.get(b.dataset.siteCard)?.order??999)).forEach(card=>{const m=focusMeta.get(card.dataset.siteCard);card.hidden=m?m.visible===false:false;card.parentElement?.appendChild(card)});
+}catch(e){console.warn("Editing Studio sync skipped:",e.message)}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",load,{once:true});else load()})();
