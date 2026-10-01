@@ -82,5 +82,33 @@ footer{background:#062c24;color:#fff;padding:58px 0 22px}.foot{display:grid;grid
 <div><h4>SUPPORT</h4><div class="links2"><a href="#give">Give</a><a href="mailto:info@passionforgodsglory.org?subject=Volunteer%20Enquiry">Volunteer</a><a href="mailto:info@passionforgodsglory.org?subject=Partnership%20Enquiry">Partnership</a><a href="mailto:info@passionforgodsglory.org?subject=General%20Enquiry">General Enquiry</a></div></div>
 <div><h4>CONTACT</h4><p>info@passionforgodsglory.org<br>Mukono, Uganda</p></div>
 </div><div class="wrap copyright"><span>© 2026 A Passion For God's Glory Foundation. All rights reserved.</span><span>Serving people. Building hope.</span></div></footer>
-</body>
+<script>
+(function(){
+  const nav=document.querySelector('nav');
+  const menu=document.querySelector('.menu');
+  const links=document.querySelector('.links');
+  if(menu&&links){
+    const panel=document.createElement('div');
+    panel.className='mobile-panel';
+    panel.innerHTML=links.innerHTML;
+    nav.appendChild(panel);
+    menu.setAttribute('aria-expanded','false');
+    menu.addEventListener('click',()=>{
+      const open=panel.classList.toggle('open');
+      menu.setAttribute('aria-expanded',String(open));
+      menu.textContent=open?'×':'☰';
+    });
+    panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      panel.classList.remove('open'); menu.setAttribute('aria-expanded','false'); menu.textContent='☰';
+    }));
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'});}
+  }));
+  const style=document.createElement('style');
+  style.textContent='.mobile-panel{display:none}.mobile-panel.open{display:grid;gap:0;border-top:1px solid var(--line);background:#fff;box-shadow:0 14px 25px rgba(16,44,36,.08)}.mobile-panel a{padding:14px 4%;font-size:13px;font-weight:700;color:var(--forest);border-bottom:1px solid var(--line)}@media(min-width:981px){.mobile-panel{display:none!important}}';
+  document.head.appendChild(style);
+})();
+</script></body>
 </html>
