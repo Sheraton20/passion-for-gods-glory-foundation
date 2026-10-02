@@ -88,7 +88,8 @@ async function downloadPdf(data){
   doc.save("employee-application-"+esc(data.full_name)+".pdf");
 }
 function msg(t,c){status.textContent=t;status.className="status "+(c||"")}
-pdfBtn.addEventListener("click",()=>downloadPdf(snapshot()).catch(()=>msg("Could not create the PDF. Please try again.","error")));afterPdfBtn.addEventListener("click",()=>lastSnapshot&&downloadPdf(lastSnapshot).catch(()=>msg("Could not create the PDF. Please try again.","error")));\nphoto.addEventListener("change",()=>{const f=photo.files?.[0];if(!f)return;if(f.size>5*1024*1024){photo.value="";status.textContent="Please choose an image under 5 MB.";status.className="status error";return}const u=URL.createObjectURL(f);preview.src=u;preview.style.display="block";status.textContent=""});
+pdfBtn.addEventListener("click",()=>downloadPdf(snapshot()).catch(()=>msg("Could not create the PDF. Please try again.","error")));afterPdfBtn.addEventListener("click",()=>lastSnapshot&&downloadPdf(lastSnapshot).catch(()=>msg("Could not create the PDF. Please try again.","error")));
+photo.addEventListener("change",()=>{const f=photo.files?.[0];if(!f)return;if(f.size>5*1024*1024){photo.value="";status.textContent="Please choose an image under 5 MB.";status.className="status error";return}const u=URL.createObjectURL(f);preview.src=u;preview.style.display="block";status.textContent=""});
 form.addEventListener("submit",async e=>{e.preventDefault();status.className="status";status.textContent="Submitting your application…";btn.disabled=true;
 try{const f=photo.files?.[0];if(!f)throw new Error("Please choose a profile picture.");if(f.size>5*1024*1024)throw new Error("Please choose an image under 5 MB.");
 const endpoint=U+"/functions/v1/employee-application";
