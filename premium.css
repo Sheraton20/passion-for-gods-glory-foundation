@@ -767,3 +767,61 @@ footer,footer p,footer a{font-size:16px;line-height:1.8}
 .programs-cta .btn{white-space:nowrap;background:#d8a83e;color:#12382e;padding:14px 20px}
 @media(max-width:850px){#focus .focusgrid,.programs-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#focus .work-commitment{grid-template-columns:1fr}.programs-hero{padding:82px 0}.programs-values{grid-template-columns:1fr}}
 @media(max-width:600px){#focus .focusgrid,.programs-grid{grid-template-columns:1fr}#focus .card{min-height:0;padding:25px}#focus .work-commitment{padding:25px 22px}#focus .work-commitment .btn{justify-self:start}.programs-hero{padding:70px 0 80px}.programs-hero p{font-size:18px}.programs-cta{padding:27px 23px;display:block}.programs-cta .btn{display:inline-flex;margin-top:20px}.programs-grid .pic{height:235px}}
+
+
+/* Homepage composition pass — clearer rhythm, calmer spacing and stronger hierarchy. */
+body:has(#home) .hero{min-height:690px}
+body:has(#home) .hero .copy{max-width:1180px;width:min(1180px,92%);padding-top:128px;padding-bottom:170px}
+body:has(#home) .hero .eyebrow{padding:8px 12px;border:1px solid rgba(240,201,104,.36);border-radius:999px;background:rgba(0,0,0,.12);letter-spacing:1.7px}
+body:has(#home) .hero h1{max-width:760px;font-size:clamp(46px,6.1vw,78px);line-height:1.07;letter-spacing:-1.35px;margin:22px 0}
+body:has(#home) .hero p{max-width:650px;font-size:19px!important;line-height:1.8!important;color:#eef5f1}
+body:has(#home) .hero .actions{gap:14px}
+body:has(#home) .hero .btn{min-height:50px;padding:14px 22px}
+body:has(#home) .hero .btn.gold{box-shadow:0 12px 28px rgba(216,168,62,.23)}
+body:has(#home) .hero .btn.light:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+body:has(#home) nav .donate{transition:transform .2s ease,box-shadow .2s ease}
+body:has(#home) nav .donate:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(216,168,62,.32)}
+body:has(#home) .principles-heading{max-width:800px;margin:0 auto 30px;text-align:center}
+body:has(#home) .principles-kicker{display:inline-block;color:#927022}
+body:has(#home) .principles-heading h2{font:700 clamp(30px,3.5vw,43px)/1.17 "Playfair Display",Georgia,serif;color:#0b3d32;margin:12px 0}
+body:has(#home) .principles-heading p{max-width:680px;margin:0 auto;color:#607068;font-size:17px;line-height:1.8}
+body:has(#home) .trustbox{border-radius:22px;box-shadow:0 18px 48px rgba(16,44,36,.08)}
+body:has(#home) .trustitem{padding:27px 22px}
+body:has(#home) .home-about .aboutgrid{box-shadow:0 24px 60px rgba(16,44,36,.12);border-radius:24px;overflow:hidden}
+body:has(#home) .home-about .aboutimg{border-radius:0;object-position:center}
+body:has(#home) .home-about .aboutcopy{border-radius:0}
+body:has(#home) .home-stories .heading{margin-bottom:34px}
+body:has(#home) .home-stories .story{border-radius:22px;box-shadow:0 12px 34px rgba(11,61,50,.055);transition:transform .28s ease,box-shadow .28s ease}
+body:has(#home) .home-stories .story:hover{transform:translateY(-5px);box-shadow:0 22px 48px rgba(11,61,50,.12)}
+body:has(#home) .home-stories .storyimg{width:100%;height:230px;object-fit:cover;object-position:center}
+body:has(#home) .home-stories .storybody{padding:25px 25px 28px}
+body:has(#home) .team-section{background:linear-gradient(180deg,#fbf8f0 0%,#fff 100%)}
+body:has(#home) #give .givepanel{box-shadow:0 20px 48px rgba(0,0,0,.12)}
+body:has(#home) #involved .involve{border-radius:22px;box-shadow:0 10px 30px rgba(11,61,50,.045);transition:transform .25s ease,box-shadow .25s ease}
+body:has(#home) #involved .involve:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,61,50,.09)}
+body:has(#home) .transparency{font-size:15px;line-height:1.8;border-radius:0 14px 14px 0;padding:22px 25px}
+body:has(#home) footer .brand{max-width:360px}
+@media(max-width:800px){
+  body:has(#home) .hero{min-height:650px}
+  body:has(#home) .hero .copy{padding:108px 0 150px}
+  body:has(#home) .hero h1{font-size:clamp(39px,8.7vw,55px);letter-spacing:-.7px}
+  body:has(#home) .hero p{font-size:18px!important}
+  body:has(#home) .trustitem{padding:22px 18px}
+  body:has(#home) .home-stories .storyimg{height:220px}
+}
+@media(max-width:620px){
+  body:has(#home) .hero{min-height:670px}
+  body:has(#home) .hero .copy{padding:90px 0 150px}
+  body:has(#home) .hero .actions{align-items:stretch;flex-direction:column;max-width:310px}
+  body:has(#home) .hero .actions .btn{width:100%}
+  body:has(#home) .principles-heading{margin-bottom:24px}
+  body:has(#home) .principles-heading h2{font-size:31px}
+  body:has(#home) .home-about .aboutgrid{border-radius:20px}
+  body:has(#home) .home-stories .storyimg{height:235px}
+  body:has(#home) .transparency{padding:18px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  body:has(#home) .home-stories .story,
+  body:has(#home) #involved .involve,
+  body:has(#home) nav .donate{transition:none}
+}
