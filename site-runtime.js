@@ -49,7 +49,7 @@ async function applyGlobalHeroVideo(){
 
 async function loadGlobalCampaigns(){
  try{
-  const rows=await getJson("/rest/v1/campaigns?select=id,title,slug,summary,image_url,goal_amount,currency,featured,starts_at,ends_at,button_label&published=eq.true&order=featured.desc,created_at.desc");
+  const rows=await getJson("/rest/v1/campaigns?select=id,title,slug,summary,image_url,video_url,goal_amount,currency,featured,starts_at,ends_at,button_label&published=eq.true&order=featured.desc,created_at.desc");
   const today=new Date().toISOString().slice(0,10);
   const active=rows.filter(c=>(!c.starts_at||c.starts_at<=today)&&(!c.ends_at||c.ends_at>=today));
   document.querySelectorAll("[data-campaigns-section]").forEach(section=>{section.hidden=!active.length;});
@@ -64,7 +64,7 @@ async function loadGlobalCampaigns(){
   const nav=document.querySelector("nav");
   if(nav&&nav.parentNode)nav.insertAdjacentElement("afterend",bar);else document.body.insertBefore(bar,document.body.firstChild);
   bar.querySelector(".site-campaign-dismiss").addEventListener("click",()=>bar.remove());
-  document.querySelectorAll("[data-campaigns-container]").forEach(container=>{container.style.display=active.length?"grid":"none";container.innerHTML=active.map(c=>'<article class="campaign-public-card">'+(c.image_url?'<img src="'+safe(String(c.image_url))+'" alt="">':'')+'<div><span class="site-campaign-kicker">Foundation campaign</span><h3>'+safe(String(c.title||""))+'</h3><p>'+safe(String(c.summary||""))+'</p>'+(c.goal_amount?'<strong>Goal: '+new Intl.NumberFormat("en-US",{style:"currency",currency:c.currency||"USD",maximumFractionDigits:0}).format(c.goal_amount)+'</strong>':'')+'<a class="btn gold" href="/donate.html?campaign='+encodeURIComponent(c.slug||"")+'">'+safe(c.button_label||"Support this campaign")+' →</a></div></article>').join("");});
+  document.querySelectorAll("[data-campaigns-container]").forEach(container=>{container.style.display=active.length?"grid":"none";container.innerHTML=active.map(c=>'<article class="campaign-public-card">'+(c.image_url?'<img src="'+safe(String(c.image_url))+'" alt="">':'')+(c.video_url?'<video src="'+safe(String(c.video_url))+'" controls playsinline preload="metadata" aria-label="'+safe(String(c.title||"Campaign video"))+'"></video>':'')+'<div><span class="site-campaign-kicker">Foundation campaign</span><h3>'+safe(String(c.title||""))+'</h3><p>'+safe(String(c.summary||""))+'</p>'+(c.goal_amount?'<strong>Goal: '+new Intl.NumberFormat("en-US",{style:"currency",currency:c.currency||"USD",maximumFractionDigits:0}).format(c.goal_amount)+'</strong>':'')+'<a class="btn gold" href="/donate.html?campaign='+encodeURIComponent(c.slug||"")+'">'+safe(c.button_label||"Support this campaign")+' →</a></div></article>').join("");});
  }catch(e){console.warn("Campaign display sync skipped:",e.message)}
 }
 
