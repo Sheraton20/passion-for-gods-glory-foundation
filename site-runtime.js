@@ -52,6 +52,7 @@ async function loadGlobalCampaigns(){
   const rows=await getJson("/rest/v1/campaigns?select=id,title,slug,summary,image_url,goal_amount,currency,featured,starts_at,ends_at,button_label&published=eq.true&order=featured.desc,created_at.desc");
   const today=new Date().toISOString().slice(0,10);
   const active=rows.filter(c=>(!c.starts_at||c.starts_at<=today)&&(!c.ends_at||c.ends_at>=today));
+  document.querySelectorAll("[data-campaigns-section]").forEach(section=>{section.hidden=!active.length;});
   if(!active.length)return;
   const featured=active.find(c=>c.featured)||active[0];
   if(document.getElementById("siteCampaignRibbon"))return;
