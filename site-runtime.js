@@ -75,8 +75,11 @@ async function loadGlobalCampaigns(){
 
 async function loadFoundationStoriesPublic(){
  try{
-  const rows=await getJson("/rest/v1/foundation_stories?select=id,title,summary,body,category,image_url,video_url,media_caption,featured,sort_order,created_at&published=eq.true&order=featured.desc,sort_order.asc,created_at.desc");
+  const rows=await getJson("/rest/v1/foundation_stories?select=id,title,slug,summary,body,category,image_url,video_url,media_caption,featured,sort_order,created_at&published=eq.true&order=featured.desc,sort_order.asc,created_at.desc");
   const box=document.getElementById("foundationStoriesPublic");if(!box)return;
+  // Do not let an empty or incomplete API response erase the committed Jennifer story.
+  const hasJennifer=rows.some(r=>r.slug==="jennifers-woven-tears"||String(r.title||"").includes("Jennifer’s Woven Tears"));
+  if(box.querySelector(".managed-story-card")&&!hasJennifer)return;
   const escStory=v=>String(v??"").replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
   const safeMedia=v=>{try{const u=new URL(String(v||""),location.origin);return (u.protocol==="https:"||u.protocol==="http:")?u.href:""}catch(e){return ""}};
   if(!rows.length){box.innerHTML='<div class="managed-story-empty">New stories will appear here as they are added by the foundation team.</div>';return}
