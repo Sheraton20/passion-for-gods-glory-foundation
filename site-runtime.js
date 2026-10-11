@@ -13,7 +13,8 @@ h1,.h2,.card h3,.storybody h3,.involve h3,.aboutcopy .h2{color:var(--studio-prim
 async function getJson(path){const r=await fetch(U+path,{cache:"no-store",headers:{apikey:K,Accept:"application/json"}});if(!r.ok)throw new Error("Studio sync HTTP "+r.status);return r.json()}
 function setLogo(url){if(!url)return;document.querySelectorAll("img.foundation-logo").forEach(e=>{e.src=url;e.removeAttribute("srcset");e.alt="A Passion for God’s Glory Foundation logo"});document.querySelectorAll(".brand .logo, footer .logo").forEach(e=>{e.style.backgroundImage="url('"+url.replace(/'/g,"%27")+"')";e.style.backgroundSize="contain";e.style.backgroundRepeat="no-repeat";e.style.backgroundPosition="center";e.style.backgroundColor="#fff";e.style.color="transparent";e.textContent=""})}
 
-async function applyGlobalHeroVideo(){
+async function applyGlobalHeroVideo(skipLocalHero=false){
+ if(skipLocalHero)return;
  try{
   const rows=await getJson("/rest/v1/site_content?select=content_key,content_value,content_type,is_visible&page=eq.global&section=eq.hero");
   const value=k=>{const r=rows.find(x=>x.content_key===k);return r&&r.is_visible!==false?String(r.content_value||"").trim():""};
@@ -96,13 +97,46 @@ async function loadFoundationStoriesPublic(){
  }catch(e){console.warn("Foundation stories could not be loaded:",e.message);const box=document.getElementById("foundationStoriesPublic");if(box&&!box.querySelector(".managed-story-card"))box.innerHTML='<div class="managed-story-empty">Stories are temporarily unavailable. Please refresh the page shortly.</div>'}
 }
 
+
+function applyPageHeroMedia(rows,page){
+ const candidates=(rows||[]).filter(r=>r.section==="hero"&&r.is_visible!==false&&["image","video"].includes(r.content_type)&&/background|hero[_-]?media/i.test(String(r.content_key||""))&&String(r.content_value||"").trim());
+ candidates.sort((a,b)=>{
+  const ta=Date.parse(a.updated_at||"")||0,tb=Date.parse(b.updated_at||"")||0;
+  if(tb!==ta)return tb-ta;
+  const rank=k=>/background_video|hero[_-]?media/i.test(k)?3:/^background$/i.test(k)?2:/background_image/i.test(k)?1:0;
+  return rank(String(b.content_key||""))-rank(String(a.content_key||""));
+ });
+ const chosen=candidates[0];
+ if(!chosen)return false;
+ document.querySelectorAll(".hero,.broadcast-hero").forEach(hero=>{
+  const media=hero.querySelector(".hero-media")||hero.querySelector("[data-site-background]");
+  let img=media?media.querySelector("img"):hero.querySelector("img.hero-image,[data-site-background-media]");
+  let video=media?media.querySelector("video"):hero.querySelector("video.site-selected-hero-video");
+  if(chosen.content_type==="video"){
+   hero.querySelectorAll(".global-charity-video-frame,.global-charity-video-credit").forEach(n=>n.remove());
+   if(!video){video=document.createElement("video");video.className="site-selected-hero-video";video.playsInline=true;video.muted=true;video.defaultMuted=true;video.loop=true;video.autoplay=true;video.preload="metadata";video.setAttribute("aria-hidden","true");video.style.cssText="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;";
+    if(media){media.insertBefore(video,media.firstChild)}else{hero.style.position=hero.style.position||"relative";hero.style.isolation="isolate";hero.insertBefore(video,hero.firstChild);}
+   }
+   video.pause();video.src=String(chosen.content_value).trim();video.muted=true;video.defaultMuted=true;video.loop=true;video.autoplay=true;video.playsInline=true;video.classList.remove("hidden");video.style.visibility="visible";video.load();
+   const play=video.play();if(play&&play.catch)play.catch(()=>{});
+   if(img){img.classList.add("hidden");img.style.visibility="hidden";}
+  }else{
+   hero.querySelectorAll(".global-charity-video-frame,.global-charity-video-credit").forEach(n=>n.remove());
+   if(video){video.pause();video.removeAttribute("src");video.load();video.classList.add("hidden");video.style.visibility="hidden";}
+   if(!img&&media){img=document.createElement("img");img.alt="";img.setAttribute("aria-hidden","true");img.style.cssText="width:100%;height:100%;object-fit:cover;display:block;";media.insertBefore(img,media.firstChild);}
+   if(img){img.src=String(chosen.content_value).trim();img.classList.remove("hidden");img.style.visibility="visible";}
+  }
+ });
+ return true;
+}
+
 async function load(){let x=null;try{const settings=await getJson("/rest/v1/site_settings?select=*&id=eq.true&limit=1");x=settings[0]||null}catch(e){console.warn("Studio settings sync skipped:",e.message)}if(x){applyTheme(x.active_theme,x.animation_preset);document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute("content",(T[x.active_theme]||T.heritage)[0]));if(x.site_title)document.title=x.site_title;if(x.tagline)document.querySelectorAll("[data-site-tagline]").forEach(e=>e.textContent=x.tagline);setLogo(x.logo_url);if(x.favicon_url){let f=document.querySelector('link[rel="icon"]');if(!f){f=document.createElement("link");f.rel="icon";document.head.appendChild(f)}f.href=x.favicon_url}}
-const page=(location.pathname.split("/").pop().replace(/\.html$/,"")||"home");if(page==="stories")await loadFoundationStoriesPublic();await loadGlobalCampaigns();const rows=await getJson("/rest/v1/site_content?select=section,content_key,content_value,content_type,sort_order,is_visible&page=eq."+encodeURIComponent(page));await applyGlobalHeroVideo();const focusCards=[...document.querySelectorAll("[data-site-card]")];const focusMeta=new Map();
+const page=(location.pathname.split("/").pop().replace(/\.html$/,"")||"home");if(page==="stories")await loadFoundationStoriesPublic();await loadGlobalCampaigns();const rows=await getJson("/rest/v1/site_content?select=section,content_key,content_value,content_type,sort_order,is_visible,updated_at&page=eq."+encodeURIComponent(page));const focusCards=[...document.querySelectorAll("[data-site-card]")];const focusMeta=new Map();
 try{const staff=await getJson("/rest/v1/employee_applications?select=id,full_name,position,department,bio,photo_url&status=eq.approved&order=approved_at.asc,created_at.asc");const grid=document.querySelector(".teamgrid");if(grid&&staff.length){const founder=grid.querySelector(".team-card");const founderHtml=founder?founder.outerHTML:"";grid.innerHTML=founderHtml+staff.map(s=>'<article class="team-card"><div class="team-photo team-photo-live"><img src="'+String(s.photo_url||"").replace(/"/g,"&quot;")+'" alt="'+String(s.full_name||"").replace(/"/g,"&quot;")+'"></div><div class="team-body"><span class="team-role">'+String(s.department||"TEAM MEMBER").replace(/</g,"&lt;")+'</span><h3>'+String(s.full_name||"").replace(/</g,"&lt;")+'</h3><p>'+String(s.position||"").replace(/</g,"&lt;")+(s.bio?' · '+String(s.bio).replace(/</g,"&lt;"):"")+'</p></div></article>').join("")}}catch(e){console.warn("Team directory sync skipped:",e.message)}
 try{for(const r of rows){const key=r.section+"."+r.content_key;const aliases=new Set([key,r.content_key,page+"."+r.content_key]);const keyed=[...document.querySelectorAll("[data-site-key]")].filter(e=>aliases.has(e.getAttribute("data-site-key")));const backgrounds=[...document.querySelectorAll("[data-site-background]")].filter(e=>aliases.has(e.getAttribute("data-site-background")));const mediaContainers=[...document.querySelectorAll("[data-site-media-container]")].filter(e=>aliases.has(e.getAttribute("data-site-media-container")));
 if(r.section==="focus"&&r.content_key.startsWith("card.")){const p=r.content_key.split(".");const id=p[1];if(!focusMeta.has(id))focusMeta.set(id,{order:r.sort_order??999,visible:r.is_visible!==false});const m=focusMeta.get(id);m.order=Math.min(m.order,r.sort_order??999);if(r.is_visible===false)m.visible=false}
 backgrounds.forEach(container=>{const img=[...container.querySelectorAll("img[data-site-background-media]")].find(e=>new Set([key,r.content_key,page+"."+r.content_key]).has(e.getAttribute("data-site-background-media")));const video=[...container.querySelectorAll("video[data-site-background-media]")].find(e=>new Set([key,r.content_key,page+"."+r.content_key]).has(e.getAttribute("data-site-background-media")));if(r.content_type==="image"&&img){img.src=r.content_value;img.classList.remove("hidden");if(video){video.pause();video.removeAttribute("src");video.classList.add("hidden")}}else if(r.content_type==="video"&&video){video.src=r.content_value;video.classList.remove("hidden");video.muted=true;video.loop=true;video.autoplay=true;video.load();const p=video.play();if(p&&p.catch)p.catch(()=>{});if(img)img.classList.add("hidden")}});
 mediaContainers.forEach(container=>{container.classList.remove("hidden");const img=[...container.querySelectorAll("img[data-site-key]")].find(e=>new Set([key,r.content_key,page+"."+r.content_key]).has(e.getAttribute("data-site-key")));const video=[...container.querySelectorAll("video[data-site-key]")].find(e=>new Set([key,r.content_key,page+"."+r.content_key]).has(e.getAttribute("data-site-key")));if(img)img.classList.toggle("hidden",r.content_type!=="image");if(video)video.classList.toggle("hidden",r.content_type!=="video")});
 keyed.forEach(e=>{if(r.content_type==="image"){if(e.tagName==="IMG"){e.src=r.content_value;e.removeAttribute("srcset");e.removeAttribute("loading");}else e.style.backgroundImage="url('"+r.content_value.replace(/'/g,"%27")+"')"}else if(r.content_type==="video"){if(e.tagName==="VIDEO"){e.src=r.content_value;e.load()}else e.style.backgroundImage="url('"+r.content_value.replace(/'/g,"%27")+"')"}else if(r.content_type==="url"&&e.tagName==="A")e.href=r.content_value;else e.textContent=r.content_value})}
-focusCards.sort((a,b)=>(focusMeta.get(a.dataset.siteCard)?.order??999)-(focusMeta.get(b.dataset.siteCard)?.order??999)).forEach(card=>{const m=focusMeta.get(card.dataset.siteCard);card.hidden=m?m.visible===false:false;card.parentElement?.appendChild(card)})}catch(e){console.warn("Public website sync skipped:",e.message);document.documentElement.dataset.syncError=e.message}}
+focusCards.sort((a,b)=>(focusMeta.get(a.dataset.siteCard)?.order??999)-(focusMeta.get(b.dataset.siteCard)?.order??999)).forEach(card=>{const m=focusMeta.get(card.dataset.siteCard);card.hidden=m?m.visible===false:false;card.parentElement?.appendChild(card)})}catch(e){console.warn("Public website sync skipped:",e.message);document.documentElement.dataset.syncError=e.message}const hasPageHeroMedia=applyPageHeroMedia(rows,page);await applyGlobalHeroVideo(hasPageHeroMedia)}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",load,{once:true});else load()})();
