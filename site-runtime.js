@@ -11,7 +11,7 @@ h1,.h2,.card h3,.storybody h3,.involve h3,.aboutcopy .h2{color:var(--studio-prim
 .studio-media-feature .studio-media-frame{max-width:980px;margin-top:20px;border-radius:20px;overflow:hidden;background:#e9efec;border:1px solid var(--line);box-shadow:0 18px 50px rgba(16,44,36,.10)}.studio-media-feature img,.studio-media-feature video{display:block;width:100%;max-height:620px;object-fit:cover}.studio-media-feature video{background:#111}@keyframes studioSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes studioZoom{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}@keyframes studioFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 `;document.head.appendChild(s)}} 
 async function getJson(path){const r=await fetch(U+path,{cache:"no-store",headers:{apikey:K,Accept:"application/json"}});if(!r.ok)throw new Error("Studio sync HTTP "+r.status);return r.json()}
-function setLogo(url){if(!url)return;document.querySelectorAll(".logo").forEach(e=>{e.style.backgroundImage="url('"+url.replace(/'/g,"%27")+"')";e.style.backgroundSize="cover";e.style.backgroundPosition="center";e.style.color="transparent";e.textContent=""})}
+function setLogo(url){if(!url)return;document.querySelectorAll("img.foundation-logo").forEach(e=>{e.src=url;e.removeAttribute("srcset");e.alt="A Passion for God’s Glory Foundation logo"});document.querySelectorAll(".brand .logo, footer .logo").forEach(e=>{e.style.backgroundImage="url('"+url.replace(/'/g,"%27")+"')";e.style.backgroundSize="contain";e.style.backgroundRepeat="no-repeat";e.style.backgroundPosition="center";e.style.backgroundColor="#fff";e.style.color="transparent";e.textContent=""})}
 
 async function applyGlobalHeroVideo(){
  try{
