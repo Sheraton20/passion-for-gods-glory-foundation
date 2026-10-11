@@ -825,3 +825,55 @@ body:has(#home) footer .brand{max-width:360px}
   body:has(#home) #involved .involve,
   body:has(#home) nav .donate{transition:none}
 }
+
+
+/* Accessibility contrast repair — keep text readable on every theme. */
+:root{
+  --premium-forest:#0b3d32;
+  --premium-deep:#062c24;
+  --premium-gold:#d8a83e;
+  --premium-gold-text:#65470b;
+  --premium-ink:#18312b;
+  --premium-muted:#4f625a;
+  --premium-line:#d8e1da;
+}
+body{color:#18312b}
+p,.muted,.lead,.card p,.storybody p,.involve p,.foot p,.foot a,
+.product p,.section-head p,.impact-item p,.story-product-card p{
+  color:#4f625a;
+}
+h1,h2,h3,h4,h5,h6,.h2,.section-title,.card h3,.storybody h3,
+.product h3,.product .price,.product-story summary,.product-story-person strong,
+.story-linked-products h4,.story-product-card h5{
+  color:#0b3d32;
+}
+.kicker,.category,.storybody small,.team-role,.principles-kicker,
+.story-product-role,.product-story-link,.story-full-link,.arrow{
+  color:#765313!important;
+}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid #8a651c!important;outline-offset:3px!important;
+}
+.btn.gold,.donate,.nav-cta,.add,.basketbar,.story-banner .btn{
+  background:#d8a83e!important;color:#17372d!important;
+}
+.btn.gold:hover,.donate:hover,.nav-cta:hover,.add:hover,.story-banner .btn:hover{
+  background:#efc65e!important;color:#102e25!important;
+}
+.btn.light{color:#fff!important}
+.btn.dark,.add,.nav-cta{font-weight:800}
+button:disabled{opacity:.72}
+input::placeholder,textarea::placeholder{color:#586960!important;opacity:1}
+input,textarea,select{color:#18312b!important;background:#fff!important}
+.chip{color:#42574d}
+.chip.active,.chip:hover{color:#fff!important}
+.tag{color:#65470b!important;background:#fff8e4!important}
+.store-note{color:#5d4b25!important}
+.way{color:#f4f7f5}
+footer,footer p,footer a,.foot p,.foot a{color:#d0ddd6}
+footer h4,.foot h4{color:#f0c968}
+@media(prefers-contrast:more){
+  p,.muted,.lead,.card p,.storybody p,.involve p,.product p{color:#263e33!important}
+  .kicker,.category,.storybody small,.team-role,.principles-kicker{color:#624508!important}
+  .btn.gold,.donate,.nav-cta,.add,.basketbar,.story-banner .btn{background:#efc65e!important;color:#102e25!important}
+}
