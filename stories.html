@@ -125,7 +125,10 @@ footer{background:#041f19;color:#b9cdc5;padding:45px 0;font-size:12px}.footer-in
       if(!response.ok)throw new Error("Stories request returned "+response.status);
       const stories=await response.json();
       if(!Array.isArray(stories))throw new Error("Unexpected stories response");
-      if(!stories.length){box.innerHTML='<div class="managed-story-empty">New stories will appear here as they are published.</div>';return}
+      // Keep the committed Jennifer story visible if the API response omits it.
+      const hasJennifer=stories.some(r=>r.slug==="jennifers-woven-tears"||String(r.title||"").includes("Jennifer’s Woven Tears"));
+      if(box.querySelector(".managed-story-card")&&!hasJennifer)return;
+      if(!stories.length){if(!box.querySelector(".managed-story-card"))box.innerHTML='<div class="managed-story-empty">New stories will appear here as they are published.</div>';return}
       box.innerHTML=stories.map(r=>{
         const image=safeUrl(r.image_url),video=safeUrl(r.video_url);
         const caption=esc(r.media_caption||"");
