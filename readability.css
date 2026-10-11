@@ -143,3 +143,10 @@ body:has(.hero-inner) .basketbar #view-basket{
 }
 body:has(.hero-inner) .basketbar{background:#fff;color:#0b3d32;border-color:#d8e1da}
 body:has(.hero-inner) footer{background:#041f19;color:#d0ddd6}
+
+
+/* Clear, professional typography and reliable mission-section contrast. */
+body{font-size:17px;line-height:1.65}p,li,dd,figcaption,.lead,.muted,.description{font-size:inherit;line-height:1.7}h1{font-size:clamp(2.25rem,4.4vw,4.25rem);line-height:1.08;letter-spacing:-.025em}h2,.h2,.section-title{font-size:clamp(1.8rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.018em}h3{font-size:clamp(1.2rem,1.8vw,1.55rem);line-height:1.25}
+.hero,.broadcast-hero{color:#fff!important}.hero h1,.hero h2,.hero h3,.hero p,.hero li,.hero span:not(.btn),.broadcast-hero h1,.broadcast-hero h2,.broadcast-hero h3,.broadcast-hero p,.broadcast-hero li{color:#fff!important}.hero p,.broadcast-hero p{font-size:clamp(1.05rem,1.35vw,1.25rem);line-height:1.75}.hero .kicker,.hero .eyebrow,.broadcast-hero .kicker,.broadcast-hero .eyebrow{color:#f7d978!important}
+.give,.aboutcopy,.dark,.cta,.mission-panel,.vision-panel{color:#fff}.give h1,.give h2,.give h3,.give p,.give li,.aboutcopy h1,.aboutcopy h2,.aboutcopy h3,.aboutcopy p,.aboutcopy li,.dark h1,.dark h2,.dark h3,.dark p,.dark li,.cta h1,.cta h2,.cta h3,.cta p,.cta li{color:#fff!important}.give p,.aboutcopy p,.dark p,.cta p{font-size:1.08rem;line-height:1.8}
+.card,.pillar,.choice-card,.trustbox,.story,.product,.impact-item,.involve{color:#17372d}.card h1,.card h2,.card h3,.card p,.card li,.pillar h1,.pillar h2,.pillar h3,.pillar p,.choice-card h1,.choice-card h2,.choice-card h3,.choice-card p{color:#17372d}
