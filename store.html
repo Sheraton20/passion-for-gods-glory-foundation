@@ -22,7 +22,42 @@ footer{background:var(--deep);color:#c8d7d0;padding:38px 0 25px;font-size:11px}.
 .notice{position:fixed;inset:0;z-index:50;background:#031b1680;display:none;align-items:center;justify-content:center;padding:20px}.notice.open{display:flex}.notice-box{background:white;max-width:460px;width:100%;padding:30px;border-radius:20px;box-shadow:0 25px 90px #0004}.notice-box h2{font:700 28px "Playfair Display",Georgia,serif;color:var(--forest);margin:0 0 10px}.notice-box p{font-size:13px;color:var(--muted)}.notice-box button{border:0;background:var(--forest);color:white;padding:11px 17px;border-radius:999px;font-weight:700;cursor:pointer}
 @media(max-width:900px){.links{gap:10px}.links a:nth-child(2),.links a:nth-child(4),.links a:nth-child(6){display:none}.hero-inner{gap:20px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-art{aspect-ratio:16/9;height:auto}.product-gallery-main{aspect-ratio:16/9;height:auto}.story-grid{gap:30px}}
 @media(max-width:640px){.topline .wrap span:last-child{display:none}.navin{min-height:68px}.links{display:none}.nav-cta{padding:10px 13px}.hero-inner{grid-template-columns:1fr;padding:55px 0 65px;gap:5px}.hero h1{font-size:44px}.hero-art{min-height:265px}.sun{width:225px;height:225px}.sun-inner{width:185px;height:185px}.sun-inner b{font-size:23px}.float-card{left:0;bottom:0}.story,.products{padding:58px 0}.story-grid{grid-template-columns:1fr;gap:12px}.section-head{display:block}.section-head p{margin-top:12px}.product-grid{gap:10px}.product-art{aspect-ratio:16/9;height:auto}.product-gallery-main{aspect-ratio:16/9;height:auto}.product-art svg{width:105px;height:105px}.product-body{padding:12px}.product h3{font-size:17px}.product p{min-height:54px}.product-foot{align-items:flex-start;flex-direction:column}.add{width:100%}.impact-grid{grid-template-columns:1fr}.footer-grid{display:block}.footer-links{margin-top:20px}.basketbar{bottom:10px;right:10px}}
-</style><style>.foundation-logo{display:block;width:clamp(190px,23vw,300px);height:auto;max-height:66px;object-fit:contain}.brand{display:flex;align-items:center;min-width:0}@media(max-width:640px){.foundation-logo{width:min(58vw,235px);max-height:54px}}</style></head>
+</style><style>.foundation-logo{display:block;width:clamp(190px,23vw,300px);height:auto;max-height:66px;object-fit:contain}.brand{display:flex;align-items:center;min-width:0}@media(max-width:640px){.foundation-logo{width:min(58vw,235px);max-height:54px}}</style>
+<style id="premium-store-card-reference">
+/* Premium product cards: landscape media, calm spacing, and aligned details. */
+#storeProductGrid.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;align-items:stretch}
+#storeProductGrid .product{min-width:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid #e5e8e1;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(20,45,34,.055);transition:transform .22s ease,box-shadow .22s ease}
+#storeProductGrid .product:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(20,45,34,.11)}
+#storeProductGrid .product-gallery{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#f4f4ef;display:flex;align-items:center;justify-content:center}
+#storeProductGrid .product-gallery-main,#storeProductGrid .product-art{display:block;width:100%;height:100%;min-height:0;aspect-ratio:auto;object-fit:contain;padding:0;background-color:#f4f4ef}
+#storeProductGrid .product-gallery-main{cursor:zoom-in;transition:transform .25s ease}
+#storeProductGrid .product-gallery-main:hover{transform:scale(1.025)}
+#storeProductGrid .product-art{display:grid;place-items:center}
+#storeProductGrid .product-art svg{width:clamp(78px,8vw,118px);height:clamp(78px,8vw,118px)}
+#storeProductGrid .product-gallery .tag{z-index:2;top:11px;left:11px;padding:6px 10px;border-radius:999px;background:#fffdf6;color:#775a20;font-size:10px;letter-spacing:.35px;box-shadow:0 2px 8px #15251a12}
+#storeProductGrid .product-gallery-thumbs{min-height:0;gap:7px;padding:9px 10px;background:#f4f4ef;border-top:1px solid #eceee8}
+#storeProductGrid .product-gallery-thumbs button{flex:0 0 40px;width:40px;height:40px;border:1px solid #dfe4db;border-radius:8px;padding:2px;background:#fff}
+#storeProductGrid .product-gallery-thumbs img{width:100%;height:100%;object-fit:contain;background:#f4f4ef}
+#storeProductGrid .product-body{flex:1;display:flex;flex-direction:column;min-width:0;padding:17px 17px 16px;gap:0}
+#storeProductGrid .category{font-size:10px;line-height:1.4;letter-spacing:1.15px;color:#927022;font-weight:800}
+#storeProductGrid .product h3{font:700 20px/1.28 "Playfair Display",Georgia,serif;color:#123d31;margin:8px 0 9px;overflow-wrap:anywhere}
+#storeProductGrid .product-body>p{font:400 14px/1.6 "DM Sans",Arial,sans-serif;color:#657168;min-height:0;margin:0 0 18px;overflow-wrap:anywhere}
+#storeProductGrid .product-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:14px;border-top:1px solid #edf0e9}
+#storeProductGrid .price{font:800 15px/1.35 "DM Sans",Arial,sans-serif;color:#173f32;white-space:normal}
+#storeProductGrid .add{display:inline-flex;justify-content:center;align-items:center;min-height:40px;padding:10px 14px;border:0;border-radius:999px;background:#103f32;color:#fff;font:700 12px/1.3 "DM Sans",Arial,sans-serif;white-space:nowrap}
+#storeProductGrid .add:hover{background:#1b5a46}
+#storeProductGrid .product-story{margin-top:13px;padding-top:11px}
+#storeProductGrid .product-story summary{font-size:12px;line-height:1.5}
+#storeProductGrid .product-story-link,#storeProductGrid .story-full-link{font-size:12px;line-height:1.5}
+#storeProductGrid .product-story-person img{object-fit:cover;object-position:center top}
+#storeProductGrid .product[hidden]{display:none!important}
+@media(max-width:1050px){#storeProductGrid.product-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
+@media(max-width:760px){#storeProductGrid.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}#storeProductGrid .product-body{padding:13px 12px 12px}#storeProductGrid .product h3{font-size:17px;line-height:1.3}#storeProductGrid .product-body>p{font-size:12px;line-height:1.5;margin-bottom:13px}#storeProductGrid .product-foot{align-items:stretch;flex-direction:column;gap:9px;padding-top:12px}#storeProductGrid .price{font-size:14px}#storeProductGrid .add{width:100%;min-height:39px}#storeProductGrid .product-gallery-thumbs{gap:5px;padding:7px}#storeProductGrid .product-gallery-thumbs button{flex-basis:34px;width:34px;height:34px}}
+@media(max-width:360px){#storeProductGrid.product-grid{gap:9px}#storeProductGrid .product-body{padding:11px 10px}#storeProductGrid .product h3{font-size:16px}#storeProductGrid .category{font-size:9px;letter-spacing:.8px}}
+@media(prefers-reduced-motion:reduce){#storeProductGrid .product,#storeProductGrid .product-gallery-main{transition:none}}
+</style>
+
+</head>
 <body>
 <div class="topline"><div class="wrap"><span>A LITTLE GOOD CAN TRAVEL A LONG WAY</span><span>Everyday finds. A bigger purpose.</span></div></div>
 <nav aria-label="Main navigation"><div class="wrap navin"><a class="brand" href="index.html" aria-label="Foundation home"><img class="foundation-logo" src="/logo.svg" alt="A Passion for God’s Glory Foundation"></a><div class="links"><a href="index.html">Foundation</a><a href="about.html">Our Story</a><a href="#products">Shop</a><a href="stories.html">Stories</a><a href="transparency.html">Transparency</a></div><a class="nav-cta" href="#products">Explore the collection ↓</a></div></nav>
