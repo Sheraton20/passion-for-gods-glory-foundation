@@ -39,6 +39,24 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-f
 footer{background:#062c24;color:#fff;padding:58px 0 22px}.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:35px}.foot .brand{color:#fff}.foot .brand small{color:var(--gold2)}.foot p,.foot a{font-size:12px;line-height:1.8;color:#bcd0c8}.foot h4{font-size:10px;letter-spacing:1.6px;color:var(--gold2);margin:4px 0 12px}.foot .links2 a{display:block}.copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:35px;padding-top:17px;font-size:10px;color:#8ea9a0;display:flex;justify-content:space-between;gap:15px}
 @media(max-width:980px){.links{display:none}.menu{display:block}.trustbox{grid-template-columns:1fr 1fr}.trustitem:nth-child(2){border-right:0}.trustitem:nth-child(-n+2){border-bottom:1px solid var(--line)}.focusgrid{grid-template-columns:1fr 1fr}.aboutgrid{grid-template-columns:1fr}.aboutimg{border-radius:24px 24px 0 0;min-height:380px}.aboutcopy{border-radius:0 0 24px 24px}.givegrid{grid-template-columns:1fr}.foot{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.hero-badge{left:4%;right:4%;bottom:62px;width:auto}.hero-media-note{right:4%;top:18px}.topbar span:last-child{display:none}.navin{min-height:68px}.brandname{font-size:13px}.brand small{font-size:7px}.hero{min-height:650px}.hero .copy{padding:80px 0 120px}h1{font-size:43px;letter-spacing:-.5px}.hero p{font-size:15px}.trustbox,.focusgrid,.storygrid,.involved,.foot{grid-template-columns:1fr}.trustitem{border-right:0!important;border-bottom:1px solid var(--line)}.trustitem:last-child{border-bottom:0}.section{padding:70px 0}.aboutimg{min-height:290px}.aboutcopy{padding:34px 26px}.pillars{grid-template-columns:1fr}.givegrid{gap:30px}.copyright{display:block}.copyright span{display:block;margin-top:5px}}
+
+/* Animated story banners — calm, accessible, and responsive */
+.story-banner-stage{position:relative;min-height:310px;margin:30px 0 38px;overflow:hidden;border-radius:24px;background:#082f26;isolation:isolate;box-shadow:0 20px 50px rgba(8,44,35,.14)}
+.story-banner{position:absolute;inset:0;display:flex;align-items:center;padding:clamp(25px,5vw,58px);color:#fff;opacity:0;visibility:hidden;transform:translateX(24px) scale(.99);transition:opacity .75s ease,transform .75s ease,visibility .75s;pointer-events:none;background:linear-gradient(110deg,rgba(4,35,28,.96),rgba(8,61,48,.86) 58%,rgba(8,61,48,.5))}
+.story-banner.is-active{opacity:1;visibility:visible;transform:translateX(0) scale(1);pointer-events:auto}
+.story-banner:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 84% 20%,rgba(216,168,62,.32),transparent 34%),linear-gradient(120deg,transparent 48%,rgba(255,255,255,.04) 48%,transparent 68%)}
+.story-banner-content{max-width:740px;position:relative;z-index:1}
+.story-banner-kicker{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:#f0c968;font-weight:800}
+.story-banner h3{font:700 clamp(28px,4vw,44px)/1.1 "Playfair Display",Georgia,serif;color:#fff;margin:12px 0}
+.story-banner p{max-width:660px;color:#e2eee8;font-size:14px;line-height:1.8;margin:0 0 20px}
+.story-banner .btn{background:#d8a83e;color:#fff}
+.story-banner-controls{position:absolute;right:24px;bottom:22px;z-index:4;display:flex;align-items:center;gap:8px}
+.story-banner-dot{width:9px;height:9px;padding:0;border:1px solid rgba(255,255,255,.8);border-radius:99px;background:transparent;cursor:pointer;transition:width .25s,background .25s}
+.story-banner-dot[aria-pressed="true"]{width:25px;background:#f0c968;border-color:#f0c968}
+.story-banner-count{color:#fff;font-size:10px;letter-spacing:1px;margin-right:4px}
+@media(max-width:620px){.story-banner-stage{min-height:360px;border-radius:18px}.story-banner{padding:26px 22px 62px}.story-banner p{font-size:13px}.story-banner-controls{right:18px;bottom:18px}}
+@media(prefers-reduced-motion:reduce){.story-banner,.story-banner-dot{transition:none!important}.story-banner{transform:none}}
+
 </style>
 <link rel="stylesheet" href="/premium.css?v=20261010-work-polish"><style>.foundation-logo{display:block;width:clamp(220px,25vw,330px);height:auto;max-height:68px;object-fit:contain}.brand{display:flex;align-items:center}@media(max-width:640px){.foundation-logo{width:min(62vw,260px);max-height:56px}}</style></head>
 <body>
@@ -79,6 +97,14 @@ footer{background:#062c24;color:#fff;padding:58px 0 22px}.foot{display:grid;grid
 
 <section id="live-campaigns" class="campaigns-home" data-campaigns-section hidden><div class="wrap"><div class="heading"><div class="kicker">CURRENT CAMPAIGNS</div><div class="h2">Small acts. Meaningful change.</div><p class="lead">Discover the campaigns currently approved by our foundation team. Each published campaign is managed through our administration studio.</p></div><div class="campaign-public-grid" data-campaigns-container></div></div></section>
 <section id="stories" class="section home-stories"><div class="wrap"><div class="heading"><div class="kicker">STORIES OF HOPE</div><div class="h2">People are at the heart of our work.</div><p class="lead">As the foundation grows, this space will share verified stories, project updates and lessons from the communities we serve.</p></div>
+
+<div class="story-banner-stage" data-story-rotator aria-label="Featured stories from the foundation">
+ <article class="story-banner is-active" aria-hidden="false"><div class="story-banner-content"><div class="story-banner-kicker">A STORY OF RESILIENCE · ILLUSTRATIVE STORY</div><h3>Jennifer’s Woven Tears: A Mother’s Struggle to Survive</h3><p>Each basket takes patience and hours of work. Jennifer dreams of a day when her skill is valued fairly and her hands can build a more secure future.</p><a class="btn" href="stories.html#jennifer-story">Read Jennifer’s story <span aria-hidden="true">→</span></a></div></article>
+ <article class="story-banner" aria-hidden="true"><div class="story-banner-content"><div class="story-banner-kicker">CHILDREN · CARE & CONNECTION</div><h3>Sometimes, being present changes a day.</h3><p>A little time, a listening ear and encouragement can help a child feel seen, valued and remembered.</p><a class="btn" href="stories.html#photo-stories">Explore children’s stories <span aria-hidden="true">→</span></a></div></article>
+ <article class="story-banner" aria-hidden="true"><div class="story-banner-content"><div class="story-banner-kicker">FAMILIES · DIGNITY & SUPPORT</div><h3>Standing beside families through difficult seasons.</h3><p>Practical care and human connection can help people face uncertainty with dignity and renewed hope.</p><a class="btn" href="stories.html#photo-stories">Explore family stories <span aria-hidden="true">→</span></a></div></article>
+ <article class="story-banner" aria-hidden="true"><div class="story-banner-content"><div class="story-banner-kicker">COMMUNITY · GROWING TOGETHER</div><h3>Lasting change begins when people work together.</h3><p>Listening, sharing skills and building genuine partnerships can create opportunities that no one person can build alone.</p><a class="btn" href="stories.html#photo-stories">Explore community stories <span aria-hidden="true">→</span></a></div></article>
+ <div class="story-banner-controls" aria-label="Choose featured story"><span class="story-banner-count" data-story-count>01 / 04</span><button class="story-banner-dot" type="button" aria-label="Show story 1" aria-pressed="true"></button><button class="story-banner-dot" type="button" aria-label="Show story 2" aria-pressed="false"></button><button class="story-banner-dot" type="button" aria-label="Show story 3" aria-pressed="false"></button><button class="story-banner-dot" type="button" aria-label="Show story 4" aria-pressed="false"></button></div>
+</div>
 <div class="storygrid">
 <article class="story"><img class="storyimg" data-site-key="stories.card.children.image" src="https://azxiopurzajxjksvzvjm.supabase.co/storage/v1/object/public/foundation-media/1790875155035-mninju29idh-IMG_7531.jpeg" alt="Children"><div class="storybody"><small>Children</small><h3>Time, attention and encouragement</h3><p>Sometimes a child needs someone willing to listen, play, encourage and remind them that they matter.</p></div></article>
 <article class="story"><img class="storyimg" data-site-key="stories.card.families.image" src="https://azxiopurzajxjksvzvjm.supabase.co/storage/v1/object/public/foundation-media/1790875221704-qqravnc2d2m-IMG_7610.jpeg" alt="Families"><div class="storybody"><small>Families</small><h3>Standing with families</h3><p>We believe practical care and human connection can help families face difficult seasons with dignity.</p></div></article>
@@ -128,5 +154,21 @@ footer{background:#062c24;color:#fff;padding:58px 0 22px}.foot{display:grid;grid
   style.textContent='.mobile-panel{display:none}.mobile-panel.open{display:grid;gap:0;border-top:1px solid var(--line);background:#fff;box-shadow:0 14px 25px rgba(16,44,36,.08)}.mobile-panel a{padding:14px 4%;font-size:13px;font-weight:700;color:var(--forest);border-bottom:1px solid var(--line)}@media(min-width:981px){.mobile-panel{display:none!important}}';
   document.head.appendChild(style);
 })();
+
+(function(){
+ const stage=document.querySelector('[data-story-rotator]');if(!stage)return;
+ const slides=[...stage.querySelectorAll('.story-banner')],dots=[...stage.querySelectorAll('.story-banner-dot')],count=stage.querySelector('[data-story-count]');
+ let active=0,timer=null;
+ const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function show(n){active=(n+slides.length)%slides.length;slides.forEach((s,i)=>{s.classList.toggle('is-active',i===active);s.setAttribute('aria-hidden',String(i!==active))});dots.forEach((d,i)=>d.setAttribute('aria-pressed',String(i===active)));if(count)count.textContent=String(active+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0')}
+ function start(){if(reduced||document.hidden)return;stop();timer=window.setInterval(()=>show(active+1),6500)}
+ function stop(){if(timer){window.clearInterval(timer);timer=null}}
+ dots.forEach((d,i)=>d.addEventListener('click',()=>{show(i);start()}));
+ stage.addEventListener('mouseenter',stop);stage.addEventListener('mouseleave',start);
+ stage.addEventListener('focusin',stop);stage.addEventListener('focusout',start);
+ document.addEventListener('visibilitychange',()=>document.hidden?stop():start());
+ show(0);start();
+})();
+
 </script><script src="/site-runtime.js?v=20261010-6" defer></script></body>
 </html>
