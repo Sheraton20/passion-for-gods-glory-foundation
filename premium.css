@@ -877,3 +877,17 @@ footer h4,.foot h4{color:#f0c968}
   .kicker,.category,.storybody small,.team-role,.principles-kicker{color:#624508!important}
   .btn.gold,.donate,.nav-cta,.add,.basketbar,.story-banner .btn{background:#efc65e!important;color:#102e25!important}
 }
+
+
+/* Preserve white headings and body copy on intentional dark image/green panels. */
+.hero h1,.hero h2,.hero h3,.hero .h2,
+.aboutcopy h1,.aboutcopy h2,.aboutcopy h3,.aboutcopy .h2,
+.give h1,.give h2,.give h3,.give .h2,
+.story-banner h1,.story-banner h2,.story-banner h3{
+  color:#fff!important;
+}
+.hero p,.aboutcopy p,.give .lead,.givepanel p,.story-banner p,
+.story-banner .story-banner-kicker,.hero-badge strong,.hero-badge span{
+  color:#f1f6f3!important;
+}
+.hero .eyebrow,.story-banner-kicker{color:#f5d778!important}
