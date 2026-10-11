@@ -91,4 +91,38 @@ footer{background:#041f19;color:#b9cdc5;padding:45px 0;font-size:12px}.footer-in
  setTimeout(syncVideoCards,900);
 })();
 </script>
+
+<script>
+/* Independent public-story loader: keeps the story library working even if other site settings fail. */
+(function(){
+  const box=document.getElementById("foundationStoriesPublic");
+  if(!box)return;
+  const endpoint="https://azxiopurzajxjksvzvjm.supabase.co/rest/v1/foundation_stories?select=id,title,slug,summary,body,category,image_url,video_url,media_caption,featured,sort_order,created_at&published=eq.true&order=featured.desc,sort_order.asc,created_at.desc";
+  const apiKey="sb_publishable_G_WkfZ2z48Zf6ZkVS6o1Fg_htFQWLTZ";
+  const esc=v=>String(v==null?"":v).replace(/[&<>"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
+  const safeUrl=v=>{try{const u=new URL(String(v||""));return /^https?:$/.test(u.protocol)?u.href:""}catch(e){return ""}};
+  async function render(){
+    try{
+      const response=await fetch(endpoint,{cache:"no-store",headers:{apikey:apiKey,Accept:"application/json"}});
+      if(!response.ok)throw new Error("Stories request returned "+response.status);
+      const stories=await response.json();
+      if(!Array.isArray(stories))throw new Error("Unexpected stories response");
+      if(!stories.length){box.innerHTML='<div class="managed-story-empty">New stories will appear here as they are published.</div>';return}
+      box.innerHTML=stories.map(r=>{
+        const image=safeUrl(r.image_url),video=safeUrl(r.video_url);
+        const caption=esc(r.media_caption||"");
+        const media=(image||video)?'<div class="managed-story-media">'+(image?'<img src="'+esc(image)+'" alt="'+esc(r.title)+'" loading="lazy">':"")+(video?'<video src="'+esc(video)+'" controls playsinline preload="metadata" aria-label="'+esc(r.title)+'"></video>':"")+(caption?'<div class="story-media-caption">'+caption+'</div>':"")+'</div>':"";
+        const body=String(r.body||"").split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>'<p>'+esc(p).replace(/\n/g,"<br>")+'</p>').join("");
+        const jennifer=r.slug==="jennifers-woven-tears"?'<div class="jennifer-actions"><a href="/store.html#products">Visit the purpose store →</a><a class="secondary" href="/store.html#products">Discover handmade products</a></div>':"";
+        return '<article class="managed-story-card">'+media+'<div class="managed-story-copy"><span class="story-tag">'+esc(r.category||"Community story")+(r.featured?" · FEATURED":"")+'</span><h3>'+esc(r.title)+'</h3><p class="story-summary">'+esc(r.summary||"")+'</p><div class="story-body">'+body+'</div>'+jennifer+'</div></article>';
+      }).join("");
+    }catch(error){
+      console.error("Independent story loader:",error);
+      if(!box.querySelector(".managed-story-card"))box.innerHTML='<div class="managed-story-empty">We could not load stories just now. Please refresh this page. If the problem continues, contact the foundation team.</div>';
+    }
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",render,{once:true});else render();
+})();
+</script>
+
 </body></html>
