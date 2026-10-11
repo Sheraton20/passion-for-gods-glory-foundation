@@ -137,7 +137,7 @@ function assignAutoTextKeys(){
  const root=document.body;if(!root)return;
  const pathFor=el=>{const parts=[];let n=el;while(n&&n!==root){const p=n.parentElement;if(!p)break;parts.unshift(Array.prototype.indexOf.call(p.children,n));n=p}return "autotext_"+parts.join("_")};
  root.querySelectorAll(tags).forEach(el=>{
-  if(el.closest("script,style,noscript,svg,template,[contenteditable=true]")||el.closest("[data-site-key]"))return;
+  if(el.closest("script,style,noscript,svg,template,[contenteditable=true]")||el.closest("[data-site-key]:not([data-auto-edit-key])"))return;
   if(el.getAttribute("aria-hidden")==="true"||el.hidden)return;
   const direct=[...el.childNodes].filter(n=>n.nodeType===Node.TEXT_NODE&&n.nodeValue.trim());
   if(!direct.length)return;
