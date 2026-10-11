@@ -135,9 +135,15 @@ function applyPageHeroMedia(rows,page){
    if(!video){video=document.createElement("video");video.className="site-selected-hero-video";video.playsInline=true;video.muted=true;video.defaultMuted=true;video.loop=true;video.autoplay=true;video.preload="metadata";video.setAttribute("aria-hidden","true");video.style.cssText="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;";
     if(media){media.insertBefore(video,media.firstChild)}else{hero.style.position=hero.style.position||"relative";hero.style.isolation="isolate";hero.insertBefore(video,hero.firstChild);}
    }
-   video.pause();video.src=String(chosen.content_value).trim();video.muted=true;video.defaultMuted=true;video.loop=true;video.autoplay=true;video.playsInline=true;video.classList.remove("hidden");video.style.visibility="visible";video.load();
+   // Keep the current image visible until the selected video actually decodes.
+   // This prevents an unsupported/corrupt upload (for example some .mov codecs)
+   // from leaving the hero blank while still allowing playable videos to take over.
+   video.pause();video.src=String(chosen.content_value).trim();video.muted=true;video.defaultMuted=true;video.loop=true;video.autoplay=true;video.playsInline=true;video.classList.remove("hidden");video.style.visibility="visible";
+   if(img){img.classList.remove("hidden");img.style.visibility="visible";}
+   video.oncanplay=()=>{if(img){img.classList.add("hidden");img.style.visibility="hidden";}};
+   video.onerror=()=>{video.classList.add("hidden");video.style.visibility="hidden";if(img){img.classList.remove("hidden");img.style.visibility="visible";}};
+   video.load();
    const play=video.play();if(play&&play.catch)play.catch(()=>{});
-   if(img){img.classList.add("hidden");img.style.visibility="hidden";}
   }else{
    hero.querySelectorAll(".global-charity-video-frame,.global-charity-video-credit").forEach(n=>n.remove());
    if(video){video.pause();video.removeAttribute("src");video.load();video.classList.add("hidden");video.style.visibility="hidden";}
