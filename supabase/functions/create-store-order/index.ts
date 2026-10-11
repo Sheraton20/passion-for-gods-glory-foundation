@@ -64,8 +64,8 @@ Deno.serve(async (req: Request) => {
   if ([...quantities.values()].some(qty => qty > 20)) return reply(400, { error: "A product quantity cannot exceed 20." });
 
   const sb = createClient(url, secret, { auth: { persistSession: false, autoRefreshToken: false } });
-  const prior = await sb.from("store_orders").select("id,order_reference,fulfillment_status,payment_status").eq("idempotency_key", idempotency_key).maybeSingle();
-  if (prior.data) return reply(200, { ok: true, order_reference: prior.data.order_reference, status: prior.data.fulfillment_status, payment_status: prior.data.payment_status, repeated_request: true });
+  const prior = await sb.from("store_orders").select("id,order_reference,fulfillment_status,payment_status,items_subtotal,currency").eq("idempotency_key", idempotency_key).maybeSingle();
+  if (prior.data) return reply(200, { ok: true, order_reference: prior.data.order_reference, status: prior.data.fulfillment_status, payment_status: prior.data.payment_status, items_subtotal: prior.data.items_subtotal, currency: prior.data.currency, repeated_request: true });
 
   const productIds = [...quantities.keys()];
   const { data: products, error: productError } = await sb.from("store_products")
@@ -107,8 +107,8 @@ Deno.serve(async (req: Request) => {
   const { data: created, error: createError } = await sb.from("store_orders").insert(order).select("id,order_reference,fulfillment_status,payment_status").single();
   if (createError || !created) {
     if (createError?.code === "23505") {
-      const again = await sb.from("store_orders").select("order_reference,fulfillment_status,payment_status").eq("idempotency_key", idempotency_key).maybeSingle();
-      if (again.data) return reply(200, { ok: true, order_reference: again.data.order_reference, status: again.data.fulfillment_status, payment_status: again.data.payment_status, repeated_request: true });
+      const again = await sb.from("store_orders").select("order_reference,fulfillment_status,payment_status,items_subtotal,currency").eq("idempotency_key", idempotency_key).maybeSingle();
+      if (again.data) return reply(200, { ok: true, order_reference: again.data.order_reference, status: again.data.fulfillment_status, payment_status: again.data.payment_status, items_subtotal: again.data.items_subtotal, currency: again.data.currency, repeated_request: true });
     }
     console.error("Order creation failed:", createError?.message);
     return reply(500, { error: "We could not save your order. Please try again; you have not been charged." });
