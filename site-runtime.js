@@ -110,7 +110,7 @@ function applyPageHeroMedia(rows,page){
   hero.classList.add("hero-has-slideshow");
   const host=media||hero;
   let deck=hero.querySelector(".foundation-hero-slideshow");
-  if(!deck){deck=document.createElement("div");deck.className="foundation-hero-slideshow";deck.setAttribute("aria-label","Hero photo and video slideshow");deck.style.cssText="position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;";if(media){media.style.position=media.style.position||"relative";media.insertBefore(deck,media.firstChild)}else{hero.style.position=hero.style.position||"relative";hero.insertBefore(deck,hero.firstChild)}}
+  if(!deck){deck=document.createElement("div");deck.className="foundation-hero-slideshow";deck.setAttribute("aria-label","Hero photo and video slideshow");deck.style.cssText="position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;";if(media){media.insertBefore(deck,media.firstChild)}else{hero.style.position=hero.style.position||"relative";hero.insertBefore(deck,hero.firstChild)}}
   deck.innerHTML="";
   const previous=hero.querySelector(".foundation-hero-prev"),next=hero.querySelector(".foundation-hero-next"),dots=hero.querySelector(".foundation-hero-dots");
   if(previous)previous.remove();if(next)next.remove();if(dots)dots.remove();
@@ -133,6 +133,7 @@ function applyPageHeroMedia(rows,page){
   setSlide(0);return true;
  }
  hero.classList.remove("hero-has-slideshow");
+ hero.querySelectorAll(".foundation-hero-slideshow,.foundation-hero-prev,.foundation-hero-next,.foundation-hero-dots").forEach(n=>n.remove());
  const candidates=pageRows.filter(r=>["image","video"].includes(r.content_type)&&/^(background_image|background_video|background|hero_media|hero-image|hero-video)$/i.test(String(r.content_key||"")));
  const rank=r=>{const k=String(r.content_key||"").toLowerCase();if(r.content_type==="video"&&k==="background_video")return 60;if(r.content_type==="image"&&k==="background_image")return 60;if(k==="hero_video"&&r.content_type==="video")return 55;if(k==="hero-image"&&r.content_type==="image")return 55;if(k==="hero_media")return 50;if(k==="background")return 10;return 0};
  candidates.sort((a,b)=>rank(b)-rank(a)||(Date.parse(b.updated_at||"")||0)-(Date.parse(a.updated_at||"")||0));
