@@ -1,0 +1,66 @@
+/* Site-wide readability and contrast layer. Loaded after each page's local styles. */
+:root{
+  --readable-ink:#17372d;
+  --readable-muted:#4c6057;
+  --readable-line:#d6e1da;
+  --readable-gold-text:#684b0b;
+}
+html{color-scheme:light}
+body{color:var(--readable-ink)}
+p,li,dd,figcaption,blockquote,.muted,.subtle,.description,.help-text,.field-help,.form-hint,.empty-state,.small-text,.secondary-text{
+  color:var(--readable-muted);
+}
+h1,h2,h3,h4,h5,h6,legend,caption,.title,.section-title,.card-title{
+  color:#103e31;
+}
+label,summary,th{color:#24483a}
+small,.eyebrow,.kicker,.eyebrow-text,.section-kicker,.category-label,.tagline{
+  color:var(--readable-gold-text);
+}
+a{ text-underline-offset:3px }
+a:not(.btn):not(.button):not(.nav-cta):not(.donate):not(.brand):not(.logo):not([class*="white"]):not([class*="light"]){
+  text-decoration-thickness:1px;
+}
+input,textarea,select,option{
+  color:#17372d;
+  background-color:#fff;
+  border-color:#aabbb0;
+}
+input::placeholder,textarea::placeholder{color:#596b61;opacity:1}
+input:focus,textarea:focus,select:focus,button:focus-visible,a:focus-visible{
+  outline:3px solid #805d17;
+  outline-offset:2px;
+}
+button:disabled{opacity:.75}
+table th{background:#edf3ee;color:#17372d}
+table td{color:#344d41}
+hr{border-color:var(--readable-line)}
+/* Keep intentional dark/image sections legible rather than turning their copy dark. */
+.hero,.hero *,header,header *,footer,footer *,nav.dark,nav.dark *,
+.dark,.dark *,[data-theme="dark"],[data-theme="dark"] *,
+.cta,.cta *,[class*="banner"],[class*="banner"] *,
+[style*="background:#0"],[style*="background: #0"],[style*="background-color:#0"],[style*="background-color: #0"]{
+  --readable-ink:#f5f8f6;
+}
+.hero p,.hero li,header p,header li,footer p,footer a,.dark p,.dark li,
+.cta p,[class*="banner"] p,[class*="banner"] li{
+  color:#eaf2ed;
+}
+.hero h1,.hero h2,.hero h3,header h1,header h2,footer h1,footer h2,
+.dark h1,.dark h2,.dark h3,.cta h1,.cta h2,[class*="banner"] h1,[class*="banner"] h2{
+  color:#fff;
+}
+.hero .kicker,.hero .eyebrow,.dark .kicker,.dark .eyebrow,
+.cta .kicker,[class*="banner"] .kicker{color:#f5d778}
+.btn,.button,button[type="submit"],input[type="submit"]{
+  font-weight:650;
+}
+.btn.gold,.button.gold,.donate,.nav-cta{
+  color:#17372d;
+}
+@media(prefers-contrast:more){
+  p,li,dd,figcaption,.muted,.subtle,.description,.help-text,.field-help{
+    color:#263d32;
+  }
+  input,textarea,select{border-color:#53685b}
+}
