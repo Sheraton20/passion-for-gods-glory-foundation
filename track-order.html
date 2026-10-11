@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer"><meta name="robots" content="noindex,nofollow">
+<title>Track your order | The Good Things Store</title>
+<style>
+:root{color-scheme:light;--green:#174b39;--gold:#b28a3b;--ink:#23342d;--muted:#66766f;--paper:#f4f7f3;--line:#e1e9e2}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}header{background:var(--green);color:#fff;padding:22px 18px}header div{max-width:850px;margin:auto}header a{color:#fff;text-decoration:none;font-weight:700}.wrap{max-width:850px;margin:34px auto;padding:0 16px 40px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(18px,4vw,32px);box-shadow:0 12px 36px #173f3210}h1{font-size:clamp(26px,5vw,36px);line-height:1.15;color:var(--green);margin:0 0 10px}.muted{color:var(--muted)}.status{display:inline-block;background:#edf4ee;border:1px solid #dce9dd;color:var(--green);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:20px 0}.metric{background:#f7faf7;border:1px solid var(--line);padding:14px;border-radius:12px}.metric small{display:block;color:var(--muted)}.metric strong{display:block;overflow-wrap:anywhere}.section{border-top:1px solid var(--line);padding-top:18px;margin-top:22px}ul{padding-left:20px}.item{padding:12px 0;border-bottom:1px solid var(--line)}.timeline{border-left:2px solid #dce7dc;margin:12px 0 0 6px;padding-left:18px}.event{position:relative;padding:0 0 16px}.event:before{content:"";position:absolute;left:-25px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--gold)}.error{padding:14px;background:#fff4ed;border:1px solid #f1d5c5;border-radius:12px;color:#7a321c}.button{display:inline-block;background:var(--green);color:#fff;text-decoration:none;padding:10px 15px;border-radius:10px;font-weight:700;border:0}.hidden{display:none!important}footer{max-width:850px;margin:0 auto;padding:0 16px 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<header><div><a href="/store.html">← The Good Things Store</a></div></header>
+<main class="wrap"><section class="panel">
+<h1>Track your order</h1><p class="muted">This secure page shows the latest order and shipping updates shared by the foundation team. It does not display your address, email address, or phone number.</p>
+<div id="message" aria-live="polite" class="muted">Checking your secure tracking link…</div>
+<div id="details" class="hidden">
+<div class="grid"><div class="metric"><small>Order reference</small><strong id="ref"></strong></div><div class="metric"><small>Fulfilment status</small><strong><span class="status" id="status"></span></strong></div><div class="metric"><small>Payment status</small><strong id="payment"></strong></div><div class="metric"><small>Items subtotal</small><strong id="subtotal"></strong></div></div>
+<div class="section"><h2>Items</h2><div id="items"></div></div>
+<div class="section"><h2>Shipping</h2><div id="shipping"></div></div>
+<div class="section"><h2>Order history</h2><div class="timeline" id="history"></div></div>
+<p class="muted" id="updated"></p></div>
+<div style="margin-top:24px"><a class="button" href="/store.html">Return to the store</a></div>
+</section></main>
+<footer>A Passion for God’s Glory Foundation · The Good Things Store<br>Keep this private tracking link to yourself. Anyone with the complete link can view the limited order status shown here.</footer>
+<script>
+(function(){
+const API='https://azxiopurzajxjksvzvjm.supabase.co';
+const KEY='';
+const msg=document.getElementById('message'),details=document.getElementById('details');
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const date=v=>{if(!v)return 'Not yet recorded';const d=new Date(v);return Number.isNaN(d.getTime())?'Not yet recorded':d.toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})};
+const money=(v,c)=>{if(v==null)return 'Not yet quoted';try{return new Intl.NumberFormat(undefined,{style:'currency',currency:c||'UGX',maximumFractionDigits:2}).format(Number(v))}catch{return (c||'')+' '+Number(v).toLocaleString()}};
+async function run(){
+const token=new URLSearchParams(location.search).get('token')||'';
+if(!token){msg.innerHTML='<div class="error">This page needs the complete secure tracking link from your order confirmation.</div>';return}
+if(!KEY){msg.innerHTML='<div class="error">Order tracking is not configured on this page yet. Please contact the foundation team.</div>';return}
+try{
+const res=await fetch(API+'/functions/v1/track-store-order',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({token}),cache:'no-store',credentials:'omit'});
+const data=await res.json().catch(()=>({}));
+if(!res.ok||!data.ok)throw new Error(data.error||'We could not find this order. Check the complete tracking link.');
+const o=data.order;
+document.getElementById('ref').textContent=o.reference||'—';
+document.getElementById('status').textContent=String(o.status||'received').replace(/[_-]/g,' ');
+document.getElementById('payment').textContent=String(o.payment_status||'unpaid').replace(/[_-]/g,' ');
+document.getElementById('subtotal').textContent=money(o.items_subtotal,o.currency);
+document.getElementById('items').innerHTML=(o.items||[]).map(i=>'<div class="item"><strong>'+esc(i.name)+'</strong><br><span class="muted">Quantity: '+esc(i.quantity)+' · '+esc(money(i.unit_price,i.currency))+' each</span></div>').join('')||'<p class="muted">Item details are not available yet.</p>';
+let ship='Method requested: '+esc(String(o.shipping_method||'not recorded').replace(/[_-]/g,' '))+'<br>Shipping quote: '+esc(o.shipping_quote==null?'Not yet quoted':money(o.shipping_quote,o.shipping_currency||o.currency))+'<br>Carrier: '+esc(o.shipping_provider||'Not yet assigned');
+if(o.tracking_number)ship+='<br>Tracking number: '+esc(o.tracking_number);
+if(o.tracking_url&&/^https:\/\//i.test(o.tracking_url))ship+='<br><a href="'+esc(o.tracking_url)+'" target="_blank" rel="noopener noreferrer">Open carrier tracking page →</a>';
+document.getElementById('shipping').innerHTML=ship;
+document.getElementById('history').innerHTML=(o.history||[]).map(e=>'<div class="event"><strong>'+esc(String(e.to_status||e.event||'Update').replace(/[_-]/g,' '))+'</strong><br><span class="muted">'+esc(date(e.at))+'</span></div>').join('')||'<p class="muted">Order history will appear as the team updates your order.</p>';
+document.getElementById('updated').textContent='Last updated: '+date(o.updated_at)+' · Order received: '+date(o.created_at);
+details.classList.remove('hidden');msg.textContent='Latest order details loaded.';
+}catch(e){msg.innerHTML='<div class="error">'+esc(e.message||'Tracking is temporarily unavailable.')+'</div>'}
+}
+run();
+})();
+</script>
+</body></html>
